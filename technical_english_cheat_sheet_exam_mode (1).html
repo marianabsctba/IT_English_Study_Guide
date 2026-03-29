@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECHNICAL ENGLISH CHEAT SHEET — CYBERSECURITY & IT</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --bg: #0d0d0b;
+    --bg2: #111110;
+    --bg3: #181815;
+    --paper: #1a1a17;
+    --border: #3a3a30;
+    --border2: #2a2a22;
+    --green: #7fff7f;
+    --green2: #4dbb4d;
+    --green3: #2d7a2d;
+    --amber: #ffcc00;
+    --amber2: #cc9900;
+    --red: #ff4444;
+    --red2: #cc2222;
+    --cyan: #00cccc;
+    --cyan2: #008888;
+    --white: #e8e8d8;
+    --gray: #888878;
+    --gray2: #555548;
+    --font-mono: 'Courier Prime', 'Share Tech Mono', monospace;
+    --font-title: 'Special Elite', 'Courier Prime', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── HEADER ── */
+  #main-header {
+    background: var(--bg2);
+    border-bottom: 2px solid var(--green3);
+    padding: 20px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .logo-block h1 {
+    font-family: var(--font-title);
+    font-size: 22px;
+    color: var(--green);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .logo-block p {
+    color: var(--amber);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .status-block {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: right;
+  }
+
+  .status-block .blink {
+    color: var(--green);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* ── NAV ── */
+  #nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 10px 30px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--green3);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .sec-title {
+    font-family: var(--font-title);
+    font-size: 26px;
+    color: var(--amber);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--amber2);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+
+  .sec-title::before {
+    content: '>> ';
+    color: var(--green);
+  }
+
+  .subsec-title {
+    font-family: var(--font-title);
+    font-size: 16px;
+    color: var(--green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-left: 3px solid var(--green3);
+    padding-left: 10px;
+    margin: 25px 0 12px;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+  @media(max-width:900px) { .grid-3,.grid-4 { grid-template-columns: 1fr 1fr; } }
+  @media(max-width:600px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    border-top: 2px solid var(--green3);
+    padding: 16px;
+    position: relative;
+  }
+
+  .card h3 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border2);
+    padding-bottom: 6px;
+  }
+
+  .card.red-top { border-top-color: var(--red2); }
+  .card.cyan-top { border-top-color: var(--cyan2); }
+  .card.amber-top { border-top-color: var(--amber2); }
+
+  /* ── VOCAB TABLE ── */
+  .vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .vocab-table th {
+    background: var(--bg3);
+    color: var(--green);
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--green3);
+  }
+
+  .vocab-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border2);
+    vertical-align: top;
+  }
+
+  .vocab-table tr:hover td { background: rgba(127,255,127,0.04); }
+
+  .vocab-table td:first-child {
+    color: var(--amber);
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .vocab-table td:nth-child(2) { color: var(--cyan); }
+  .vocab-table td:nth-child(3) { color: var(--gray); font-style: italic; }
+  .vocab-table td:nth-child(4) { color: var(--white); font-size: 12px; }
+
+  /* ── PHRASE BLOCK ── */
+  .phrase-block {
+    background: var(--bg3);
+    border-left: 3px solid var(--cyan2);
+    padding: 10px 14px;
+    margin: 6px 0;
+    font-size: 13px;
+  }
+
+  .phrase-en { color: var(--white); }
+  .phrase-pt { color: var(--gray); font-style: italic; font-size: 12px; }
+  .phrase-context { color: var(--amber); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── TAG / BADGE ── */
+  .tag {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid;
+    margin: 2px;
+  }
+
+  .tag-green { color: var(--green); border-color: var(--green3); }
+  .tag-red { color: var(--red); border-color: var(--red2); }
+  .tag-amber { color: var(--amber); border-color: var(--amber2); }
+  .tag-cyan { color: var(--cyan); border-color: var(--cyan2); }
+
+  /* ── ALERT BOXES ── */
+  .alert {
+    padding: 12px 16px;
+    margin: 10px 0;
+    border: 1px solid;
+    font-size: 13px;
+  }
+
+  .alert::before { margin-right: 8px; }
+  .alert-tip { border-color: var(--green3); background: rgba(45,122,45,0.1); color: var(--green); }
+  .alert-tip::before { content: '[TIP]'; }
+  .alert-warn { border-color: var(--amber2); background: rgba(204,153,0,0.1); color: var(--amber); }
+  .alert-warn::before { content: '[WARN]'; }
+  .alert-crit { border-color: var(--red2); background: rgba(204,34,34,0.1); color: var(--red); }
+  .alert-crit::before { content: '[CRITICAL]'; }
+
+  /* ── QUIZ SECTION ── */
+  #quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .quiz-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .quiz-stat {
+    text-align: center;
+  }
+
+  .quiz-stat .val {
+    font-size: 28px;
+    font-weight: bold;
+    display: block;
+    line-height: 1;
+  }
+
+  .quiz-stat .lbl {
+    font-size: 10px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  #timer-display {
+    font-size: 36px;
+    font-family: var(--font-title);
+    color: var(--green);
+    min-width: 80px;
+    text-align: center;
+  }
+
+  #timer-display.warning { color: var(--amber); animation: pulse 0.5s ease-in-out infinite alternate; }
+  #timer-display.danger { color: var(--red); animation: pulse 0.3s ease-in-out infinite alternate; }
+
+  @keyframes pulse { from{opacity:1} to{opacity:0.5} }
+
+  .progress-bar-outer {
+    height: 4px;
+    background: var(--border2);
+    margin-bottom: 20px;
+  }
+
+  .progress-bar-inner {
+    height: 100%;
+    background: var(--green3);
+    transition: width 0.3s;
+  }
+
+  .question-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--amber2);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .question-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .q-number {
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .q-category {
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 1px;
+    border: 1px solid var(--cyan2);
+    padding: 1px 6px;
+    text-transform: uppercase;
+  }
+
+  .q-difficulty {
+    font-size: 11px;
+    padding: 1px 6px;
+    border: 1px solid;
+  }
+
+  .diff-easy { color: var(--green); border-color: var(--green3); }
+  .diff-med { color: var(--amber); border-color: var(--amber2); }
+  .diff-hard { color: var(--red); border-color: var(--red2); }
+
+  .question-text {
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+
+  .question-text strong { color: var(--amber); }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media(max-width:600px) { .options-grid { grid-template-columns: 1fr; } }
+
+  .option-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 12px 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--amber2);
+    background: rgba(204,153,0,0.08);
+    color: var(--amber);
+  }
+
+  .option-btn.correct {
+    background: rgba(45,122,45,0.25);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .option-btn.wrong {
+    background: rgba(204,34,34,0.2);
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  .option-letter {
+    color: var(--gray2);
+    font-size: 11px;
+    margin-right: 6px;
+    text-transform: uppercase;
+  }
+
+  .explanation-box {
+    display: none;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green3);
+    padding: 16px;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+
+  .explanation-box.show { display: block; }
+
+  .explanation-box .exp-label {
+    color: var(--green);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .explanation-box p { color: var(--white); line-height: 1.6; margin-bottom: 6px; }
+  .explanation-box .why { color: var(--amber); font-style: italic; }
+
+  .quiz-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green3);
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 24px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--green); color: var(--bg); }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 24px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+
+  .btn-secondary:hover { border-color: var(--amber2); color: var(--amber); }
+
+  .btn-danger {
+    background: transparent;
+    border: 1px solid var(--red2);
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 10px 24px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+
+  .btn-danger:hover { background: var(--red2); color: var(--white); }
+
+  /* ── REPORT ── */
+  #report-section {
+    display: none;
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  #report-section.show { display: block; }
+
+  .report-header {
+    text-align: center;
+    border-bottom: 2px solid var(--green3);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+
+  .report-header h2 {
+    font-family: var(--font-title);
+    font-size: 28px;
+    color: var(--amber);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .score-big {
+    font-size: 72px;
+    font-family: var(--font-title);
+    line-height: 1;
+    margin: 10px 0;
+  }
+
+  .score-big.pass { color: var(--green); }
+  .score-big.fail { color: var(--red); }
+
+  .report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  @media(max-width:600px) { .report-grid { grid-template-columns: 1fr; } }
+
+  .report-stat-card {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .report-stat-card .big-num {
+    font-size: 36px;
+    font-family: var(--font-title);
+    display: block;
+  }
+
+  .report-stat-card .label {
+    font-size: 11px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .chart-container {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .chart-title {
+    font-size: 11px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+
+  .bar-chart-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 10px;
+  }
+
+  .bar-chart-row .cat-name {
+    width: 160px;
+    font-size: 11px;
+    color: var(--white);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bar-outer {
+    flex: 1;
+    height: 18px;
+    background: var(--bg3);
+    position: relative;
+  }
+
+  .bar-inner {
+    height: 100%;
+    background: var(--green3);
+    transition: width 0.8s ease;
+  }
+
+  .bar-inner.low { background: var(--red2); }
+  .bar-inner.mid { background: var(--amber2); }
+
+  .bar-val {
+    position: absolute;
+    right: 6px;
+    top: 1px;
+    font-size: 11px;
+    color: var(--white);
+  }
+
+  .gap-list {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--red2);
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .gap-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border2);
+    font-size: 13px;
+  }
+
+  .gap-item:last-child { border-bottom: none; }
+
+  .gap-item .gi-num { color: var(--red); font-weight: bold; min-width: 30px; }
+  .gap-item .gi-topic { color: var(--white); flex: 1; }
+  .gap-item .gi-suggestion { color: var(--amber); font-size: 11px; }
+
+  .suggestion-block {
+    background: var(--bg3);
+    border: 1px solid var(--green3);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .suggestion-block h4 {
+    color: var(--green);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .suggestion-block p { color: var(--white); font-size: 13px; line-height: 1.6; }
+
+  .answered-list { margin-top: 20px; }
+
+  .answered-item {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    padding: 14px;
+    margin-bottom: 8px;
+  }
+
+  .answered-item.correct-ans { border-left: 3px solid var(--green); }
+  .answered-item.wrong-ans { border-left: 3px solid var(--red); }
+
+  .ai-label { color: var(--green); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .aw-label { color: var(--red); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── STUDY GUIDE SECTION ── */
+  .study-path-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    padding: 16px;
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--green3);
+    color: var(--green);
+    font-family: var(--font-title);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-content h4 { color: var(--amber); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .step-content p { color: var(--white); font-size: 13px; }
+  .step-content ul { list-style: none; padding-left: 0; margin-top: 6px; }
+  .step-content ul li { color: var(--gray); font-size: 12px; padding: 2px 0; }
+  .step-content ul li::before { content: '→ '; color: var(--green); }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: #0a0a08;
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--cyan2);
+    padding: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--cyan);
+    overflow-x: auto;
+    margin: 8px 0;
+    white-space: pre;
+  }
+
+  /* ── QUIZ START SCREEN ── */
+  #quiz-start-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  #quiz-start-screen h2 {
+    font-family: var(--font-title);
+    font-size: 32px;
+    color: var(--amber);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .quiz-config {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0 30px;
+  }
+
+  .config-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+
+  .config-btn.selected {
+    background: var(--green3);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  #start-quiz-btn {
+    font-size: 16px;
+    padding: 14px 40px;
+    letter-spacing: 4px;
+  }
+
+  /* ── FINISH SCREEN ── */
+  #quiz-finish-screen { display: none; text-align: center; padding: 30px; }
+  #quiz-finish-screen.show { display: block; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--green3); }
+
+  /* ── RESPONSIVE ── */
+  @media print {
+    body { background: white !important; color: black !important; }
+    body::before { display: none !important; content: none !important; }
+    #main-header, #nav-bar, .section, #quiz-start-screen, #quiz-container, #quiz-finish-screen { display: none !important; }
+    #report-section, #report-section.show { display: block !important; max-width: 100% !important; padding: 20px !important; }
+    #report-section * { visibility: visible !important; }
+    .chart-container, .report-stat-card, .gap-list, .suggestion-block, .answered-item { break-inside: avoid; page-break-inside: avoid; }
+    .btn-primary, .btn-secondary, .btn-danger { display: none !important; }
+    .score-big, .report-header h2, .chart-title, .sec-title, .subsec-title { color: black !important; }
+    .bar-outer { border: 1px solid #999 !important; }
+    .bar-inner { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  /* ── UTILITY ── */
+  .mt { margin-top: 20px; }
+  .mb { margin-bottom: 20px; }
+  .text-green { color: var(--green); }
+  .text-amber { color: var(--amber); }
+  .text-red { color: var(--red); }
+  .text-cyan { color: var(--cyan); }
+  .text-gray { color: var(--gray); }
+  .mono { font-family: var(--font-mono); }
+  .bold { font-weight: bold; }
+
+  /* ── FLASHCARD ── */
+  .flashcard-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .flashcard {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flashcard:hover { border-color: var(--amber2); }
+
+  .flashcard .fc-front {
+    font-size: 18px;
+    color: var(--amber);
+    font-family: var(--font-title);
+    letter-spacing: 1px;
+  }
+
+  .flashcard .fc-back {
+    display: none;
+    font-size: 13px;
+    color: var(--white);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  .flashcard .fc-back .pt { color: var(--gray); font-style: italic; font-size: 12px; }
+
+  .flashcard.flipped .fc-back { display: block; }
+  .flashcard.flipped { border-color: var(--green3); background: rgba(45,122,45,0.05); }
+
+  .flashcard .fc-hint {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* TOP CATEGORIES BAR */
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .cat-filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s;
+  }
+
+  .cat-filter-btn:hover, .cat-filter-btn.active {
+    border-color: var(--cyan2);
+    color: var(--cyan);
+  }
+
+  /* COMMAND TABLE STYLE (retained for layout compatibility) */
+  .cmd-row { display: flex; gap: 0; margin-bottom: 2px; }
+  .cmd-command {
+    background: #0a0a08;
+    color: var(--green);
+    font-size: 12px;
+    padding: 6px 12px;
+    min-width: 260px;
+    flex-shrink: 0;
+    border: 1px solid var(--border2);
+    border-right: none;
+  }
+  .cmd-desc {
+    background: var(--paper);
+    color: var(--white);
+    font-size: 12px;
+    padding: 6px 12px;
+    flex: 1;
+    border: 1px solid var(--border2);
+  }
+  .cmd-desc small { color: var(--gray); }
+
+  /* CERT TRACK */
+  .cert-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .cert-box {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .cert-box .cert-name { color: var(--amber); font-size: 12px; font-weight: bold; }
+  .cert-box .cert-level { color: var(--gray); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .cert-arrow { color: var(--green3); font-size: 20px; padding: 0 6px; }
+
+  /* QUIZ selection filter */
+  .quiz-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .filter-label { color: var(--gray); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-top">
+    <div class="logo-block">
+      <h1>◈ TECHNICAL ENGLISH CHEAT SHEET — CYBERSECURITY &amp; IT</h1>
+      <p>Technical English Study System v3.0 // Beginner → Advanced · Cybersecurity · IT</p>
+    </div>
+    <div class="status-block">
+      <div><span class="blink">■</span> SYSTEM ONLINE</div>
+      <div id="clock-display"></div>
+      <div style="color:var(--amber)">200 QUESTIONS LOADED</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav id="nav-bar">
+  <button class="nav-btn active" onclick="showSection('sec-vocab')">Vocabulary</button>
+  <button class="nav-btn" onclick="showSection('sec-grammar')">Grammar / Structures</button>
+  <button class="nav-btn" onclick="showSection('sec-verbs')">Verbs &amp; Conjugation</button>
+  <button class="nav-btn" onclick="showSection('sec-prepositions')">Prepositions &amp; Usage</button>
+  <button class="nav-btn" onclick="showSection('sec-reading')">Reading &amp; Interpretation</button>
+  <button class="nav-btn" onclick="showSection('sec-phrases')">Phrases &amp; Writing</button>
+  <button class="nav-btn" onclick="showSection('sec-flashcards')">Flashcards</button>
+  <button class="nav-btn" onclick="showSection('sec-quiz')">Quiz (200 Q)</button>
+  <button class="nav-btn" onclick="showSection('sec-study')">Study Guide</button>
+</nav>
+
+<!-- ██████████ SECTION: VOCABULARY ██████████ -->
+<section id="sec-vocab" class="section active">
+  <div class="sec-title">Core IT &amp; Cybersecurity Vocabulary</div>
+
+  <div class="subsec-title">▸ Network Fundamentals</div>
+  <table class="vocab-table">
+    <thead><tr><th>Term</th><th>IPA / Pronunciation</th><th>PT-BR</th><th>Definition &amp; Context</th></tr></thead>
+    <tbody>
+      <tr><td>bandwidth</td><td>/ˈbændwɪdθ/</td><td>largura de banda</td><td>Maximum data transfer rate of a network connection. "The bandwidth of this link is 1 Gbps."</td></tr>
+      <tr><td>latency</td><td>/ˈleɪtənsi/</td><td>latência</td><td>Time delay between sending and receiving data. High latency = slow response.</td></tr>
+      <tr><td>throughput</td><td>/ˈθruːpʊt/</td><td>taxa de transferência real</td><td>Actual data transfer rate achieved. Always ≤ bandwidth.</td></tr>
+      <tr><td>packet</td><td>/ˈpækɪt/</td><td>pacote</td><td>Unit of data routed between origin and destination. Contains header + payload.</td></tr>
+      <tr><td>frame</td><td>/freɪm/</td><td>quadro/frame</td><td>Layer 2 PDU. Encapsulates packets with MAC addresses.</td></tr>
+      <tr><td>datagram</td><td>/ˈdeɪtəɡræm/</td><td>datagrama</td><td>Layer 3 PDU used in IP (UDP). Self-contained packet with routing info.</td></tr>
+      <tr><td>segment</td><td>/ˈseɡmənt/</td><td>segmento</td><td>Layer 4 PDU (TCP). Contains sequence and acknowledgment numbers.</td></tr>
+      <tr><td>subnet</td><td>/ˈsʌbnɛt/</td><td>sub-rede</td><td>Logical subdivision of an IP network. "This /24 subnet has 254 usable hosts."</td></tr>
+      <tr><td>gateway</td><td>/ˈɡeɪtweɪ/</td><td>gateway/porta de saída</td><td>Default gateway: router address used to exit the local subnet.</td></tr>
+      <tr><td>broadcast</td><td>/ˈbrɔːdkɑːst/</td><td>broadcast</td><td>Packet sent to all devices on a segment. MAC: FF:FF:FF:FF:FF:FF.</td></tr>
+      <tr><td>unicast</td><td>/ˈjuːnɪkɑːst/</td><td>unicast</td><td>One-to-one communication. Most common traffic type.</td></tr>
+      <tr><td>multicast</td><td>/ˈmʌltɪkɑːst/</td><td>multicast</td><td>One-to-many (specific group). Used in streaming and routing protocols.</td></tr>
+      <tr><td>collision domain</td><td>/kəˈlɪʒən dəˈmeɪn/</td><td>domínio de colisão</td><td>Network segment where packets can collide. Each switch port = 1 collision domain.</td></tr>
+      <tr><td>broadcast domain</td><td>/ˈbrɔːdkɑːst dəˈmeɪn/</td><td>domínio de broadcast</td><td>All devices receiving broadcast frames. Routers separate broadcast domains.</td></tr>
+      <tr><td>encapsulation</td><td>/ɪnˌkæpsjʊˈleɪʃən/</td><td>encapsulamento</td><td>Process of wrapping data with protocol headers at each OSI layer.</td></tr>
+      <tr><td>decapsulation</td><td>/diːˌkæpsjʊˈleɪʃən/</td><td>desencapsulamento</td><td>Stripping headers at each OSI layer upon receipt.</td></tr>
+      <tr><td>hop</td><td>/hɒp/</td><td>salto</td><td>Each router a packet passes through. TTL decrements by 1 per hop.</td></tr>
+      <tr><td>jitter</td><td>/ˈdʒɪtər/</td><td>variação de latência (jitter)</td><td>Variation in packet delivery time. Critical in VoIP and video.</td></tr>
+      <tr><td>duplex</td><td>/ˈdjuːplɛks/</td><td>duplex</td><td>Full duplex = simultaneous TX/RX. Half duplex = one direction at a time.</td></tr>
+      <tr><td>QoS</td><td>/kjuː əʊ ɛs/</td><td>qualidade de serviço</td><td>Quality of Service. Mechanisms to prioritize critical traffic.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsec-title">▸ Security Vocabulary</div>
+  <table class="vocab-table">
+    <thead><tr><th>Term</th><th>IPA</th><th>PT-BR</th><th>Definition &amp; Context</th></tr></thead>
+    <tbody>
+      <tr><td>vulnerability</td><td>/ˌvʌlnərəˈbɪləti/</td><td>vulnerabilidade</td><td>Weakness in a system that can be exploited. "A zero-day vulnerability was discovered."</td></tr>
+      <tr><td>exploit</td><td>/ˈeksplɔɪt/ (n.) /ɪksˈplɔɪt/ (v.)</td><td>exploit / explorar</td><td>Code or method used to take advantage of a vulnerability.</td></tr>
+      <tr><td>threat</td><td>/θrɛt/</td><td>ameaça</td><td>Potential danger to a system or data. Threats × Vulnerabilities = Risk.</td></tr>
+      <tr><td>risk</td><td>/rɪsk/</td><td>risco</td><td>Probability × Impact. Risk = Threat × Vulnerability × Asset Value.</td></tr>
+      <tr><td>attack vector</td><td>/əˈtæk ˈvɛktər/</td><td>vetor de ataque</td><td>Path used by attacker to gain access. "Email phishing is the most common attack vector."</td></tr>
+      <tr><td>payload</td><td>/ˈpeɪləʊd/</td><td>carga maliciosa</td><td>Malicious code delivered by an exploit or malware.</td></tr>
+      <tr><td>patch</td><td>/pætʃ/</td><td>patch/correção</td><td>Software update fixing vulnerabilities. "Apply patches promptly to reduce exposure."</td></tr>
+      <tr><td>hardening</td><td>/ˈhɑːdənɪŋ/</td><td>hardening/endurecimento</td><td>Process of securing a system by reducing attack surface.</td></tr>
+      <tr><td>least privilege</td><td>/liːst ˈprɪvɪlɪdʒ/</td><td>menor privilégio</td><td>Principle: grant only minimum permissions needed. Critical in access control.</td></tr>
+      <tr><td>defense in depth</td><td>/dɪˈfɛns ɪn dɛpθ/</td><td>defesa em profundidade</td><td>Layered security approach. Multiple controls protect assets.</td></tr>
+      <tr><td>IOC</td><td>/aɪ əʊ siː/</td><td>indicador de comprometimento</td><td>Indicator of Compromise. Evidence that a system has been breached.</td></tr>
+      <tr><td>TTPs</td><td>/tiː tiː piːz/</td><td>táticas, técnicas e procedimentos</td><td>Tactics, Techniques &amp; Procedures. How attackers operate (MITRE ATT&amp;CK).</td></tr>
+      <tr><td>APT</td><td>/eɪ piː tiː/</td><td>ameaça persistente avançada</td><td>Advanced Persistent Threat. Long-term targeted attack, often nation-state.</td></tr>
+      <tr><td>zero-day</td><td>/ˈzɪərəʊ deɪ/</td><td>zero-day</td><td>Unknown vulnerability with no available patch. "They used a zero-day exploit."</td></tr>
+      <tr><td>social engineering</td><td>/ˈsəʊʃəl ˌɛndʒɪˈnɪərɪŋ/</td><td>engenharia social</td><td>Manipulating people to divulge info or perform actions. Phishing is a subset.</td></tr>
+      <tr><td>phishing</td><td>/ˈfɪʃɪŋ/</td><td>phishing</td><td>Deceptive emails/messages tricking users into revealing credentials or installing malware.</td></tr>
+      <tr><td>spear phishing</td><td>/spɪər ˈfɪʃɪŋ/</td><td>phishing dirigido</td><td>Targeted phishing aimed at a specific individual or organization.</td></tr>
+      <tr><td>whaling</td><td>/ˈweɪlɪŋ/</td><td>whaling</td><td>Spear phishing targeting high-profile executives (C-suite).</td></tr>
+      <tr><td>ransomware</td><td>/ˈrænsəmwɛː/</td><td>ransomware</td><td>Malware that encrypts files and demands ransom. "WannaCry was a global ransomware attack."</td></tr>
+      <tr><td>rootkit</td><td>/ˈruːtkɪt/</td><td>rootkit</td><td>Malware that hides itself and other malware at OS or firmware level.</td></tr>
+      <tr><td>keylogger</td><td>/ˈkiːlɒɡər/</td><td>keylogger</td><td>Records keystrokes to capture passwords and sensitive data.</td></tr>
+      <tr><td>botnet</td><td>/ˈbɒtnɛt/</td><td>botnet</td><td>Network of compromised computers (bots) controlled by a C2 server.</td></tr>
+      <tr><td>C2 / C&amp;C</td><td>/siː tuː/</td><td>servidor de comando e controle</td><td>Command &amp; Control server directing botnet or malware operations.</td></tr>
+      <tr><td>DDoS</td><td>/diː diː əʊ ɛs/</td><td>ataque distribuído de negação de serviço</td><td>Distributed Denial of Service. Overwhelm a target with traffic from multiple sources.</td></tr>
+      <tr><td>MitM</td><td>/mæn ɪn ðə mɪdl/</td><td>homem no meio</td><td>Man-in-the-Middle. Attacker intercepts communication between two parties.</td></tr>
+      <tr><td>SQL injection</td><td>/ɛs kjuː ɛl ɪnˈdʒɛkʃən/</td><td>injeção de SQL</td><td>Inserting malicious SQL code into input fields to manipulate databases.</td></tr>
+      <tr><td>XSS</td><td>/krɒs saɪt ˈskrɪptɪŋ/</td><td>cross-site scripting</td><td>Injecting malicious scripts into web pages viewed by other users.</td></tr>
+      <tr><td>buffer overflow</td><td>/ˈbʌfər ˈəʊvəfləʊ/</td><td>estouro de buffer</td><td>Writing data beyond allocated memory, potentially executing arbitrary code.</td></tr>
+      <tr><td>privilege escalation</td><td>/ˈprɪvɪlɪdʒ ˌɛskəˈleɪʃən/</td><td>escalonamento de privilégios</td><td>Gaining higher permissions than originally granted. Vertical or horizontal.</td></tr>
+      <tr><td>lateral movement</td><td>/ˈlætərəl ˈmuːvmənt/</td><td>movimento lateral</td><td>Attacker moves across the network after initial compromise.</td></tr>
+      <tr><td>persistence</td><td>/pəˈsɪstəns/</td><td>persistência</td><td>Attacker's ability to maintain access after reboots or credential changes.</td></tr>
+      <tr><td>exfiltration</td><td>/ɛksˌfɪltreɪʃən/</td><td>exfiltração</td><td>Unauthorized data transfer out of a network. "Data exfiltration via DNS tunneling."</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsec-title">▸ Cloud &amp; Virtualization</div>
+  <table class="vocab-table">
+    <thead><tr><th>Term</th><th>PT-BR</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>hypervisor</td><td>hipervisor</td><td>Software layer enabling VMs. Type 1 (bare-metal): ESXi, Hyper-V. Type 2 (hosted): VirtualBox.</td></tr>
+      <tr><td>tenant</td><td>inquilino/tenant</td><td>Cloud customer sharing infrastructure. Multi-tenant = multiple customers on same hardware.</td></tr>
+      <tr><td>elasticity</td><td>elasticidade</td><td>Ability to scale resources automatically on demand.</td></tr>
+      <tr><td>IaaS / PaaS / SaaS</td><td>infraestrutura/plataforma/software como serviço</td><td>Cloud service models. IaaS=VMs, PaaS=runtime, SaaS=applications.</td></tr>
+      <tr><td>IAM</td><td>gerenciamento de identidade e acesso</td><td>Identity and Access Management. Controls who can access what resources.</td></tr>
+      <tr><td>container</td><td>contêiner</td><td>Lightweight isolated runtime environment. Docker, Kubernetes orchestration.</td></tr>
+      <tr><td>microservice</td><td>microsserviço</td><td>Architecture pattern: small, independent, loosely-coupled services.</td></tr>
+      <tr><td>CSPM</td><td>gerenciamento de postura de segurança em nuvem</td><td>Cloud Security Posture Management. Detects misconfigurations in cloud environments.</td></tr>
+      <tr><td>shared responsibility model</td><td>modelo de responsabilidade compartilhada</td><td>Cloud provider secures infrastructure; customer secures data and access.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsec-title">▸ Cryptography Terms</div>
+  <table class="vocab-table">
+    <thead><tr><th>Term</th><th>PT-BR</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>plaintext</td><td>texto claro</td><td>Readable, unencrypted data. Input to encryption algorithm.</td></tr>
+      <tr><td>ciphertext</td><td>texto cifrado</td><td>Encrypted, unreadable data. Output of encryption algorithm.</td></tr>
+      <tr><td>symmetric encryption</td><td>criptografia simétrica</td><td>Same key for encryption/decryption. AES, DES, 3DES. Fast, but key distribution problem.</td></tr>
+      <tr><td>asymmetric encryption</td><td>criptografia assimétrica</td><td>Public key encrypts, private key decrypts. RSA, ECC. Solves key distribution.</td></tr>
+      <tr><td>hash</td><td>hash/resumo criptográfico</td><td>One-way function producing fixed-length output. MD5(deprecated), SHA-256, SHA-3.</td></tr>
+      <tr><td>salt</td><td>salt</td><td>Random value added to password before hashing. Prevents rainbow table attacks.</td></tr>
+      <tr><td>PKI</td><td>infraestrutura de chave pública</td><td>Public Key Infrastructure. System of CAs, certificates, and revocation.</td></tr>
+      <tr><td>certificate</td><td>certificado digital</td><td>Digital document binding public key to identity. Signed by CA.</td></tr>
+      <tr><td>digital signature</td><td>assinatura digital</td><td>Ensures authenticity and integrity. Signed with private key, verified with public key.</td></tr>
+      <tr><td>TLS/SSL</td><td>segurança da camada de transporte</td><td>Protocol securing communications. TLS 1.3 current standard. SSL is deprecated.</td></tr>
+      <tr><td>handshake</td><td>handshake/negociação</td><td>TLS negotiation establishing encryption parameters before data exchange.</td></tr>
+      <tr><td>key exchange</td><td>troca de chaves</td><td>Diffie-Hellman (DH) algorithm for securely establishing shared secret over insecure channel.</td></tr>
+      <tr><td>forward secrecy</td><td>sigilo futuro perfeito</td><td>PFS: session keys not derived from server's long-term private key. Ephemeral DH.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-tip">Pronunciation tip: "vulnerability" = /ˌvʌlnərəˈbɪləti/ — many candidates mispronounce it. Practice: "vuln-er-a-BIL-i-ty". In technical documentation, you may see "vuln" as the abbreviation.</div>
+</section>
+
+<!-- ██████████ SECTION: GRAMMAR ██████████ -->
+<section id="sec-grammar" class="section">
+  <div class="sec-title">IT Grammar &amp; Technical Structures</div>
+
+  <div class="subsec-title">▸ Modal Verbs in Technical Context</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Obligation / Necessity</h3>
+      <div class="phrase-block">
+        <div class="phrase-context">MUST / HAVE TO</div>
+        <div class="phrase-en">The firewall <strong>must</strong> block all inbound traffic on port 23.</div>
+        <div class="phrase-pt">O firewall deve bloquear todo o tráfego de entrada na porta 23.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">You <strong>have to</strong> apply the patch before Monday.</div>
+        <div class="phrase-pt">Você precisa aplicar o patch antes de segunda.</div>
+      </div>
+      <div class="alert alert-tip">MUST = internal necessity / policy. HAVE TO = external requirement.</div>
+    </div>
+    <div class="card">
+      <h3>Prohibition</h3>
+      <div class="phrase-block">
+        <div class="phrase-context">MUST NOT / CANNOT</div>
+        <div class="phrase-en">Users <strong>must not</strong> share credentials under any circumstances.</div>
+        <div class="phrase-pt">Usuários não devem compartilhar credenciais em hipótese alguma.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">You <strong>cannot</strong> access the production environment without MFA.</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Recommendation / Best Practice</h3>
+      <div class="phrase-block">
+        <div class="phrase-context">SHOULD / OUGHT TO</div>
+        <div class="phrase-en">You <strong>should</strong> enable logging on all network devices.</div>
+        <div class="phrase-pt">Você deveria ativar o registro em todos os dispositivos de rede.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">Passwords <strong>ought to</strong> be at least 12 characters long.</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Possibility / Capability</h3>
+      <div class="phrase-block">
+        <div class="phrase-context">CAN / COULD / MAY / MIGHT</div>
+        <div class="phrase-en">The attacker <strong>may</strong> exploit this misconfiguration.</div>
+        <div class="phrase-pt">O atacante pode explorar essa configuração incorreta.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">This vulnerability <strong>could</strong> lead to remote code execution.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Passive Voice in IT Documentation</div>
+  <p style="color:var(--gray);font-size:13px;margin-bottom:10px;">Technical docs heavily use passive voice. Learn to recognize and produce it.</p>
+  <div class="grid-2">
+    <div class="card cyan-top">
+      <h3>Active → Passive Examples</h3>
+      <div class="phrase-block">
+        <div class="phrase-en"><strong>Active:</strong> The administrator configured the ACL.</div>
+        <div class="phrase-pt">→ <strong>Passive:</strong> The ACL <em>was configured</em> by the administrator.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en"><strong>Active:</strong> The IDS detected an intrusion.</div>
+        <div class="phrase-pt">→ <strong>Passive:</strong> An intrusion <em>was detected</em> by the IDS.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en"><strong>Active:</strong> Engineers are patching the server.</div>
+        <div class="phrase-pt">→ <strong>Passive:</strong> The server <em>is being patched</em>.</div>
+      </div>
+    </div>
+    <div class="card cyan-top">
+      <h3>Common Passive Structures in IT</h3>
+      <div class="phrase-block"><div class="phrase-en">The router <strong>has been</strong> configured with OSPF.</div></div>
+      <div class="phrase-block"><div class="phrase-en">Traffic <strong>is filtered</strong> by the ACL.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The certificate <strong>was revoked</strong> after the breach.</div></div>
+      <div class="phrase-block"><div class="phrase-en">Ports <strong>are scanned</strong> periodically by the security team.</div></div>
+      <div class="phrase-block"><div class="phrase-en">All logs <strong>must be retained</strong> for 90 days.</div></div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Conditional Sentences in Troubleshooting</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Type 1 — Real Conditions (If present → will)</h3>
+      <div class="phrase-block">
+        <div class="phrase-en">If the interface <strong>is down</strong>, the route <strong>will be removed</strong> from the routing table.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">If you <strong>enable</strong> port security, the switch <strong>will block</strong> unknown MAC addresses.</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Type 2 — Hypothetical (If past → would)</h3>
+      <div class="phrase-block">
+        <div class="phrase-en">If the attacker <strong>had</strong> valid credentials, they <strong>would bypass</strong> the firewall entirely.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-en">If we <strong>used</strong> HTTPS, the traffic <strong>wouldn't</strong> be readable in transit.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Technical Writing Structures</div>
+  <table class="vocab-table">
+    <thead><tr><th>Structure</th><th>Example</th><th>Use Case</th></tr></thead>
+    <tbody>
+      <tr><td>In order to + verb</td><td>"In order to establish a VPN tunnel, configure IKEv2 on both peers."</td><td>Purpose / Objective</td></tr>
+      <tr><td>Due to + noun</td><td>"Due to misconfiguration, the firewall failed to block the traffic."</td><td>Cause</td></tr>
+      <tr><td>As a result of</td><td>"As a result of the patch, the vulnerability was remediated."</td><td>Effect/Consequence</td></tr>
+      <tr><td>Provided that</td><td>"Provided that MFA is enabled, remote access is permitted."</td><td>Condition</td></tr>
+      <tr><td>Unless + negative</td><td>"Unless the ACL is updated, the traffic will be denied."</td><td>Exception</td></tr>
+      <tr><td>Whereas</td><td>"TCP is reliable, whereas UDP prioritizes speed over reliability."</td><td>Contrast</td></tr>
+      <tr><td>Such as</td><td>"Protocols such as BGP, OSPF, and EIGRP handle dynamic routing."</td><td>Listing examples</td></tr>
+      <tr><td>Referred to as</td><td>"This process is referred to as encapsulation."</td><td>Definition/naming</td></tr>
+      <tr><td>Consists of</td><td>"An IP packet header consists of 20 bytes minimum."</td><td>Composition</td></tr>
+      <tr><td>Is responsible for</td><td>"The ARP protocol is responsible for resolving IP to MAC addresses."</td><td>Function description</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsec-title">▸ Prepositions in IT Context</div>
+  <div class="grid-3">
+    <div class="card amber-top">
+      <h3>ON</h3>
+      <div class="phrase-block"><div class="phrase-en">traffic <strong>on</strong> port 443</div></div>
+      <div class="phrase-block"><div class="phrase-en">running <strong>on</strong> a virtual machine</div></div>
+      <div class="phrase-block"><div class="phrase-en">device <strong>on</strong> the network</div></div>
+      <div class="phrase-block"><div class="phrase-en">based <strong>on</strong> the RFC</div></div>
+    </div>
+    <div class="card amber-top">
+      <h3>IN / WITHIN</h3>
+      <div class="phrase-block"><div class="phrase-en">vulnerability <strong>in</strong> the firmware</div></div>
+      <div class="phrase-block"><div class="phrase-en">configured <strong>in</strong> global mode</div></div>
+      <div class="phrase-block"><div class="phrase-en">packet <strong>in</strong> transit</div></div>
+      <div class="phrase-block"><div class="phrase-en"><strong>within</strong> the subnet</div></div>
+    </div>
+    <div class="card amber-top">
+      <h3>OVER / THROUGH / VIA</h3>
+      <div class="phrase-block"><div class="phrase-en">encrypted <strong>over</strong> TLS</div></div>
+      <div class="phrase-block"><div class="phrase-en">routed <strong>through</strong> the firewall</div></div>
+      <div class="phrase-block"><div class="phrase-en">connected <strong>via</strong> SSH</div></div>
+      <div class="phrase-block"><div class="phrase-en">tunneled <strong>over</strong> IPSec</div></div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Numbers &amp; Technical Notation</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>How to Read Technical Values</h3>
+      <table class="vocab-table">
+        <tr><td>192.168.1.0/24</td><td>"one ninety-two dot one sixty-eight dot one dot zero slash twenty-four"</td></tr>
+        <tr><td>FF:FF:FF:FF:FF:FF</td><td>"ef-ef colon ef-ef colon ef-ef..." (each byte spoken as hex)</td></tr>
+        <tr><td>1 Gbps</td><td>"one gigabit per second"</td></tr>
+        <tr><td>port 443</td><td>"port four-four-three" OR "port four forty-three"</td></tr>
+        <tr><td>TTL=64</td><td>"TTL of sixty-four" or "TTL equals sixty-four"</td></tr>
+        <tr><td>AES-256</td><td>"AES two-fifty-six" or "AES dash two-five-six"</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Acronym Pronunciation</h3>
+      <table class="vocab-table">
+        <tr><td>VLAN</td><td>/ˈviːlæn/ — "vee-lan"</td></tr>
+        <tr><td>OSPF</td><td>spelled: "O-S-P-F"</td></tr>
+        <tr><td>BGP</td><td>spelled: "B-G-P"</td></tr>
+        <tr><td>SSH</td><td>spelled: "S-S-H"</td></tr>
+        <tr><td>ACL</td><td>spelled: "A-C-L"</td></tr>
+        <tr><td>NAT</td><td>/næt/ — "nat"</td></tr>
+        <tr><td>QoS</td><td>"Q-O-S" or /kjuːɒs/ "cue-os"</td></tr>
+        <tr><td>EIGRP</td><td>spelled or /ˈiːɡrɪp/ "ee-grip"</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████ SECTION: VERBS & CONJUGATION ██████████ -->
+<section id="sec-verbs" class="section">
+  <div class="sec-title">Technical Verbs &amp; Conjugation</div>
+  <div class="subsec-title">▸ Essential Verbs for Cybersecurity &amp; IT</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Regular Verbs</h3>
+      <table class="vocab-table">
+        <thead><tr><th>Base</th><th>Past</th><th>Participle</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>deploy</td><td>deployed</td><td>deployed</td><td>We deployed the patch yesterday.</td></tr>
+          <tr><td>monitor</td><td>monitored</td><td>monitored</td><td>The SOC monitors alerts 24/7.</td></tr>
+          <tr><td>analyze</td><td>analyzed</td><td>analyzed</td><td>The analyst analyzed the logs.</td></tr>
+          <tr><td>detect</td><td>detected</td><td>detected</td><td>The tool detected suspicious traffic.</td></tr>
+          <tr><td>patch</td><td>patched</td><td>patched</td><td>The server has been patched.</td></tr>
+          <tr><td>scan</td><td>scanned</td><td>scanned</td><td>The host was scanned overnight.</td></tr>
+          <tr><td>encrypt</td><td>encrypted</td><td>encrypted</td><td>Data must be encrypted.</td></tr>
+          <tr><td>review</td><td>reviewed</td><td>reviewed</td><td>Please review the report.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Irregular Verbs</h3>
+      <table class="vocab-table">
+        <thead><tr><th>Base</th><th>Past</th><th>Participle</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>be</td><td>was/were</td><td>been</td><td>The system was unavailable.</td></tr>
+          <tr><td>begin</td><td>began</td><td>begun</td><td>The attack began at 02:00.</td></tr>
+          <tr><td>find</td><td>found</td><td>found</td><td>The scan found two issues.</td></tr>
+          <tr><td>go</td><td>went</td><td>gone</td><td>The service has gone offline.</td></tr>
+          <tr><td>make</td><td>made</td><td>made</td><td>They made a change.</td></tr>
+          <tr><td>read</td><td>read</td><td>read</td><td>Please read the alert carefully.</td></tr>
+          <tr><td>run</td><td>ran</td><td>run</td><td>We ran another test.</td></tr>
+          <tr><td>write</td><td>wrote</td><td>written</td><td>The analyst wrote a summary.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="subsec-title">▸ Verb Forms in Context</div>
+  <div class="grid-3">
+    <div class="card amber-top">
+      <h3>Simple Present</h3>
+      <div class="phrase-block"><div class="phrase-en">The firewall <strong>blocks</strong> unauthorized traffic.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The analyst <strong>reviews</strong> the logs every morning.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The scanner <strong>identifies</strong> known vulnerabilities.</div></div>
+    </div>
+    <div class="card amber-top">
+      <h3>Simple Past</h3>
+      <div class="phrase-block"><div class="phrase-en">The attacker <strong>gained</strong> access last night.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The team <strong>found</strong> the root cause.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The service <strong>went</strong> offline unexpectedly.</div></div>
+    </div>
+    <div class="card amber-top">
+      <h3>Passive / Present Perfect</h3>
+      <div class="phrase-block"><div class="phrase-en">The issue <strong>has been resolved</strong>.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The server <strong>was patched</strong> yesterday.</div></div>
+      <div class="phrase-block"><div class="phrase-en">The credentials <strong>have been exposed</strong>.</div></div>
+    </div>
+  </div>
+  <div class="alert alert-tip">Core rule: <strong>he / she / it + verb+s</strong>. Example: "The tool detects", "The policy applies", "The report shows".</div>
+</section>
+<section id="sec-prepositions" class="section">
+  <div class="sec-title">Prepositions &amp; Technical Usage</div>
+  <div class="subsec-title">▸ The Most Important Prepositions</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>IN</h3>
+      <div class="phrase-block"><div class="phrase-en">A vulnerability <strong>in</strong> the application</div></div>
+      <div class="phrase-block"><div class="phrase-en">An issue <strong>in</strong> production</div></div>
+      <div class="phrase-block"><div class="phrase-en">Data <strong>in</strong> transit</div></div>
+      <div class="phrase-block"><div class="phrase-en">Users <strong>in</strong> the domain</div></div>
+    </div>
+    <div class="card">
+      <h3>ON</h3>
+      <div class="phrase-block"><div class="phrase-en">Traffic <strong>on</strong> port 443</div></div>
+      <div class="phrase-block"><div class="phrase-en">Running <strong>on</strong> Linux</div></div>
+      <div class="phrase-block"><div class="phrase-en">A rule <strong>on</strong> the firewall</div></div>
+      <div class="phrase-block"><div class="phrase-en">The service is <strong>on</strong> the host</div></div>
+    </div>
+    <div class="card">
+      <h3>AT / TO / FROM</h3>
+      <div class="phrase-block"><div class="phrase-en">Access <strong>to</strong> the system</div></div>
+      <div class="phrase-block"><div class="phrase-en">Traffic <strong>from</strong> the endpoint</div></div>
+      <div class="phrase-block"><div class="phrase-en">The alert started <strong>at</strong> 03:00</div></div>
+      <div class="phrase-block"><div class="phrase-en">Connected <strong>to</strong> the VPN</div></div>
+    </div>
+  </div>
+  <div class="subsec-title">▸ Advanced Connectors</div>
+  <div class="grid-2">
+    <div class="card cyan-top">
+      <h3>OVER / THROUGH / VIA</h3>
+      <div class="phrase-block"><div class="phrase-en">Encrypted <strong>over</strong> TLS</div></div>
+      <div class="phrase-block"><div class="phrase-en">Routed <strong>through</strong> the gateway</div></div>
+      <div class="phrase-block"><div class="phrase-en">Connected <strong>via</strong> SSH</div></div>
+      <div class="phrase-block"><div class="phrase-en">Traffic tunneled <strong>through</strong> the VPN</div></div>
+    </div>
+    <div class="card cyan-top">
+      <h3>High-Frequency Patterns</h3>
+      <div class="phrase-block"><div class="phrase-en">Good <strong>at</strong> troubleshooting</div></div>
+      <div class="phrase-block"><div class="phrase-en">Responsible <strong>for</strong> the deployment</div></div>
+      <div class="phrase-block"><div class="phrase-en">Interested <strong>in</strong> cloud security</div></div>
+      <div class="phrase-block"><div class="phrase-en">Focus <strong>on</strong> the root cause</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-reading" class="section">
+  <div class="sec-title">Reading &amp; Interpretation</div>
+  <div class="subsec-title">▸ Technical Reading Strategy</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Signal Expressions</h3>
+      <table class="vocab-table">
+        <thead><tr><th>Expression</th><th>Meaning</th><th>Tip</th></tr></thead>
+        <tbody>
+          <tr><td>best describes</td><td>a mais completa</td><td>Nem sempre é a mais curta.</td></tr>
+          <tr><td>most likely</td><td>a mais provável</td><td>Pense em contexto.</td></tr>
+          <tr><td>according to</td><td>de acordo com</td><td>Busque a informação no texto.</td></tr>
+          <tr><td>in order to</td><td>para / com objetivo de</td><td>Indica finalidade.</td></tr>
+          <tr><td>due to</td><td>devido a</td><td>Indica causa.</td></tr>
+          <tr><td>as a result</td><td>como resultado</td><td>Indica consequência.</td></tr>
+          <tr><td>by default</td><td>por padrão</td><td>Sem alteração manual.</td></tr>
+          <tr><td>out of scope</td><td>fora do escopo</td><td>Não está incluído.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Mini Reading Strategy</h3>
+      <div class="phrase-block"><div class="phrase-en">1. Read the question first.</div></div>
+      <div class="phrase-block"><div class="phrase-en">2. Identify key verbs and signal words.</div></div>
+      <div class="phrase-block"><div class="phrase-en">3. Eliminate grammatically impossible options.</div></div>
+      <div class="phrase-block"><div class="phrase-en">4. Choose the most natural sentence in context.</div></div>
+      <div class="phrase-block"><div class="phrase-en">5. Re-read the full sentence before answering.</div></div>
+    </div>
+  </div>
+  <div class="subsec-title">▸ Short Reading Examples</div>
+  <div class="grid-2">
+    <div class="card amber-top">
+      <h3>Operational English</h3>
+      <div class="code-block">The monitoring system detected unusual outbound traffic from a workstation. The analyst reviewed the logs, confirmed the anomaly, and isolated the host from the network.</div>
+      <div class="alert alert-tip">Key verbs: detected, reviewed, confirmed, isolated.</div>
+    </div>
+    <div class="card amber-top">
+      <h3>Report English</h3>
+      <div class="code-block">The vulnerability was identified during routine testing. Immediate remediation is recommended to reduce the risk of exploitation and prevent lateral movement.</div>
+      <div class="alert alert-tip">Notice the passive voice: was identified, is recommended.</div>
+    </div>
+  </div>
+</section>
+<section id="sec-phrases" class="section">
+  <div class="sec-title">IT &amp; Security Phrases in Context</div>
+
+  <div class="subsec-title">▸ Incident Response Language</div>
+  <div class="grid-2">
+    <div>
+      <div class="phrase-block">
+        <div class="phrase-context">DETECTION</div>
+        <div class="phrase-en">"We have detected anomalous outbound traffic on the production server."</div>
+        <div class="phrase-pt">Detectamos tráfego de saída anômalo no servidor de produção.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">CONTAINMENT</div>
+        <div class="phrase-en">"We have isolated the affected systems to prevent further spread."</div>
+        <div class="phrase-pt">Isolamos os sistemas afetados para evitar maior propagação.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">ERADICATION</div>
+        <div class="phrase-en">"The malware has been removed and affected accounts have been disabled."</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">RECOVERY</div>
+        <div class="phrase-en">"Systems have been restored from clean backups and brought back online."</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">LESSONS LEARNED</div>
+        <div class="phrase-en">"The post-incident review identified gaps in our email filtering controls."</div>
+      </div>
+    </div>
+    <div>
+      <div class="phrase-block">
+        <div class="phrase-context">ESCALATION</div>
+        <div class="phrase-en">"I need to escalate this to the security team immediately."</div>
+        <div class="phrase-pt">Preciso escalar isso para o time de segurança imediatamente.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">SCOPE ASSESSMENT</div>
+        <div class="phrase-en">"We need to determine the blast radius of this incident."</div>
+        <div class="phrase-pt">Precisamos determinar o raio de impacto desse incidente.</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">TICKETING</div>
+        <div class="phrase-en">"Please open a P1 ticket and assign it to the SOC analyst on call."</div>
+      </div>
+      <div class="phrase-block">
+        <div class="phrase-context">COMMUNICATION</div>
+        <div class="phrase-en">"At this time, we cannot confirm whether any PII was exfiltrated."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Troubleshooting Conversation English</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Problem Description</h3>
+      <div class="phrase-block"><div class="phrase-en">"Users are reporting intermittent connectivity issues."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"The interface is flapping — it keeps going up and down."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"There's a routing loop between AS100 and AS200."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"The BGP session keeps resetting every few minutes."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"We're experiencing high CPU utilization on the core router."</div></div>
+    </div>
+    <div class="card">
+      <h3>Solution &amp; Action Phrases</h3>
+      <div class="phrase-block"><div class="phrase-en">"Let me check the interface counters for any errors."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"I'll run a packet capture to identify the root cause."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"We need to roll back the configuration change from last night."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"I'll apply the ACL to restrict access to the management plane."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"Let's document the issue and escalate it for further analysis."</div></div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Email &amp; Documentation Phrases</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Formal IT Email Phrases</h3>
+      <div class="phrase-block"><div class="phrase-en">"As per our security policy, all passwords must be changed every 90 days."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"Please be advised that the maintenance window is scheduled for Saturday at 02:00 UTC."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"I am writing to inform you of a critical vulnerability affecting your system."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"Further to our conversation, I have attached the network diagram for your review."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"Please find enclosed the penetration test report for Q3 2024."</div></div>
+    </div>
+    <div class="card">
+      <h3>Technical Report Language</h3>
+      <div class="phrase-block"><div class="phrase-en">"The vulnerability was identified during the reconnaissance phase."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"The CVSS base score for this finding is 9.8 (Critical)."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"Immediate remediation is recommended to mitigate the risk of exploitation."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"This finding has been marked as a false positive pending further analysis."</div></div>
+      <div class="phrase-block"><div class="phrase-en">"The root cause analysis revealed a misconfigured access control list."</div></div>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Certification Exam English — Tricky Phrases</div>
+  <div class="grid-2">
+    <div class="card amber-top">
+      <h3>Common Exam Qualifiers</h3>
+      <table class="vocab-table">
+        <tr><td>"BEST describes"</td><td>Look for the most accurate, complete answer.</td></tr>
+        <tr><td>"MOST likely"</td><td>Choose the probable, not the possible.</td></tr>
+        <tr><td>"FIRST step"</td><td>Process/order matters. Think methodically.</td></tr>
+        <tr><td>"LEAST privilege"</td><td>Minimum access needed — common security principle.</td></tr>
+        <tr><td>"EXCEPT"</td><td>All options are correct EXCEPT one. Read carefully!</td></tr>
+        <tr><td>"ALWAYS / NEVER"</td><td>Absolute qualifiers — usually wrong in nuanced contexts.</td></tr>
+        <tr><td>"by default"</td><td>Factory/default configuration, no changes made.</td></tr>
+        <tr><td>"in transit"</td><td>Data moving across a network (vs "at rest").</td></tr>
+      </table>
+    </div>
+    <div class="card amber-top">
+      <h3>Tricky Word Pairs</h3>
+      <table class="vocab-table">
+        <tr><td>authentication vs authorization</td><td>Auth-N = who you are. Auth-Z = what you can do.</td></tr>
+        <tr><td>encryption vs encoding</td><td>Encryption = secret key. Encoding = no key (e.g., Base64).</td></tr>
+        <tr><td>IDS vs IPS</td><td>IDS detects (passive). IPS prevents (inline, active).</td></tr>
+        <tr><td>vulnerability vs exploit</td><td>Vuln = weakness. Exploit = attack leveraging it.</td></tr>
+        <tr><td>integrity vs non-repudiation</td><td>Integrity = data unchanged. Non-repudiation = can't deny action.</td></tr>
+        <tr><td>symmetric vs asymmetric</td><td>Symmetric = same key. Asymmetric = key pair.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████ SECTION: FLASHCARDS ██████████ -->
+<section id="sec-flashcards" class="section">
+  <div class="sec-title">Interactive Flashcards</div>
+  <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">Click a card to reveal the answer. Study all categories to maximize exam performance.</p>
+
+  <div class="category-filter" id="fc-filters">
+    <button class="cat-filter-btn active" onclick="filterFC('all',this)">ALL</button>
+    <button class="cat-filter-btn" onclick="filterFC('network',this)">NETWORK</button>
+    <button class="cat-filter-btn" onclick="filterFC('security',this)">SECURITY</button>
+    <button class="cat-filter-btn" onclick="filterFC('crypto',this)">CRYPTOGRAPHY</button>
+    <button class="cat-filter-btn" onclick="filterFC('protocol',this)">PROTOCOLS</button>
+    <button class="cat-filter-btn" onclick="filterFC('grammar',this)">GRAMMAR</button>
+    <button class="cat-filter-btn" onclick="filterFC('cloud',this)">CLOUD</button>
+  </div>
+
+  <div class="flashcard-area" id="flashcard-area"></div>
+</section>
+
+<!-- ██████████ SECTION: QUIZ ██████████ -->
+<section id="sec-quiz" class="section">
+  <div id="quiz-start-screen">
+    <h2>⚡ TECHNICAL ENGLISH QUIZ</h2>
+    <p style="color:var(--gray);max-width:500px;margin:0 auto 20px">200 questions focused on technical English from beginner to advanced: grammar, verbs, vocabulary, prepositions, reading, and professional IT usage. Each question appears one at a time with a timer.</p>
+    <div class="quiz-config">
+      <div>
+        <div style="color:var(--gray);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">QUESTION COUNT</div>
+        <div style="display:flex;gap:6px">
+          <button class="config-btn" id="qcount-20" onclick="setQCount(20,this)">20</button>
+          <button class="config-btn selected" id="qcount-50" onclick="setQCount(50,this)">50</button>
+          <button class="config-btn" id="qcount-100" onclick="setQCount(100,this)">100</button>
+          <button class="config-btn" id="qcount-200" onclick="setQCount(200,this)">200 (FULL)</button>
+        </div>
+      </div>
+      <div>
+        <div style="color:var(--gray);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">TIMER PER QUESTION</div>
+        <div style="display:flex;gap:6px">
+          <button class="config-btn" id="timer-15" onclick="setTimer(15,this)">15s</button>
+          <button class="config-btn selected" id="timer-30" onclick="setTimer(30,this)">30s</button>
+          <button class="config-btn" id="timer-60" onclick="setTimer(60,this)">60s</button>
+          <button class="config-btn" id="timer-0" onclick="setTimer(0,this)">∞ OFF</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" id="start-quiz-btn" onclick="startQuiz()">▶ START QUIZ</button>
+  </div>
+
+  <div id="quiz-container" style="display:none">
+    <div class="quiz-header-bar">
+      <div class="quiz-stat">
+        <span class="val text-amber" id="q-current">1</span>
+        <span class="lbl">Question</span>
+      </div>
+      <div class="quiz-stat">
+        <span class="val text-green" id="q-correct-count">0</span>
+        <span class="lbl">Correct</span>
+      </div>
+      <div class="quiz-stat">
+        <span class="val text-red" id="q-wrong-count">0</span>
+        <span class="lbl">Wrong</span>
+      </div>
+      <div id="timer-display">30</div>
+      <div class="quiz-stat">
+        <span class="val" id="q-total">50</span>
+        <span class="lbl">Total</span>
+      </div>
+      <button class="btn-danger" onclick="endQuiz()">■ END</button>
+    </div>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progress-bar" style="width:0%"></div>
+    </div>
+    <div id="question-area"></div>
+  </div>
+
+  <div id="quiz-finish-screen">
+    <div class="sec-title">Quiz Complete — Generating Report...</div>
+  </div>
+</section>
+
+<!-- ██████████ SECTION: STUDY GUIDE ██████████ -->
+<section id="sec-study" class="section">
+  <div class="sec-title">Study Guide &amp; Learning Path</div>
+
+  <div class="subsec-title">▸ English Progression — Beginner to Advanced</div>
+  <div class="cert-track">
+    <div class="cert-box"><div class="cert-name">English Basics</div><div class="cert-level">Foundation</div></div>
+    <div class="cert-arrow">→</div>
+    <div class="cert-box"><div class="cert-name">Technical Vocabulary</div><div class="cert-level">Networking</div></div>
+    <div class="cert-arrow">→</div>
+    <div class="cert-box"><div class="cert-name">Grammar & Writing</div><div class="cert-level">Security</div></div>
+    <div class="cert-arrow">→</div>
+    <div class="cert-box"><div class="cert-name">Reading & Interpretation</div><div class="cert-level">Intermediate</div></div>
+    <div class="cert-arrow">→</div>
+    <div class="cert-box"><div class="cert-name">Meetings & Reports</div><div class="cert-level">Ethical Hacking</div></div>
+    <div class="cert-arrow">→</div>
+    <div class="cert-box"><div class="cert-name">Advanced Fluency</div><div class="cert-level">Management</div></div>
+  </div>
+
+  <div class="subsec-title">▸ 8-Week Study Plan</div>
+  <div class="study-path-step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h4>Week 1-2 — Foundation Vocabulary</h4>
+      <p>Master the 100 most critical IT English terms. Focus on pronunciation and contextual usage.</p>
+      <ul>
+        <li>Study Vocabulary section daily (30 min)</li>
+        <li>Flashcards: Network + Protocol categories</li>
+        <li>Quiz: Take short exam-mode quizzes, target 80%+</li>
+        <li>Write 5 sentences using new terms each day</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h4>Week 3 — Grammar &amp; Technical Structures</h4>
+      <p>Learn passive voice, modal verbs, and conditional sentences as used in technical documentation.</p>
+      <ul>
+        <li>Study Grammar section completely</li>
+        <li>Read one short technical summary per day</li>
+        <li>Practice writing technical sentences with modals</li>
+        <li>Quiz: Grammar-focused questions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h4>Week 4 — Protocols &amp; OSI Model</h4>
+      <p>Deep dive into protocol vocabulary and port numbers. Understand English descriptions of each protocol.</p>
+      <ul>
+        <li>Memorize all port numbers from the reference table</li>
+        <li>Study TCP vs UDP differences and when each is used</li>
+        <li>Flashcards: Protocol category</li>
+        <li>Quiz: 50 questions, protocol-focused</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h4>Week 5 — Writing & Technical Accuracy</h4>
+      <p>Learn to read, write, and explain technical actions in English. Essential for documentation, meetings, and reports.</p>
+      <ul>
+        <li>Study all verb, grammar, and writing sections</li>
+        <li>Practice explaining what each command does in English</li>
+        <li>Lab: Configure basic routing and switching, narrate in English</li>
+        <li>Quiz: writing- and reading-focused questions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h4>Week 6 — Security Terminology Deep Dive</h4>
+      <p>Master attack terminology, defense concepts, and incident response language.</p>
+      <ul>
+        <li>Study MITRE ATT&amp;CK English terms</li>
+        <li>Learn incident response phrase patterns</li>
+        <li>Flashcards: Security + Cryptography</li>
+        <li>Quiz: 100 questions — focus on security</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <h4>Week 7 — Exam Language &amp; Tricky Phrases</h4>
+      <p>Decode exam question language. Learn qualifiers, tricky word pairs, and elimination strategies.</p>
+      <ul>
+        <li>Study IT Phrases section — exam qualifiers</li>
+        <li>Practice 50-question quiz with timer on</li>
+        <li>Review wrong answers and study explanations</li>
+        <li>Focus on words: "EXCEPT", "MOST likely", "BEST"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="study-path-step">
+    <div class="step-num">7</div>
+    <div class="step-content">
+      <h4>Week 8 — Full Mock Exam &amp; Review</h4>
+      <p>Take the full 200-question quiz. Analyze your report. Target weak areas.</p>
+      <ul>
+        <li>Full 200-question quiz — timed (30s per question)</li>
+        <li>Download and review your performance report</li>
+        <li>Study all explanations for wrong answers</li>
+        <li>Review personalized study suggestions from report</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsec-title">▸ Daily Practice Techniques</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Immersion Methods</h3>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:3px 0;color:var(--white)">→ Read technical documentation in English daily</li>
+        <li style="padding:3px 0;color:var(--white)">→ Watch NetworkChuck / CBT Nuggets videos</li>
+        <li style="padding:3px 0;color:var(--white)">→ Follow CVE advisories on NVD in English</li>
+        <li style="padding:3px 0;color:var(--white)">→ Read HackerNews and BleepingComputer</li>
+        <li style="padding:3px 0;color:var(--white)">→ Set your OS and tools to English</li>
+        <li style="padding:3px 0;color:var(--white)">→ Take notes in English during labs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Active Practice</h3>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:3px 0;color:var(--white)">→ Explain concepts aloud in English (Feynman)</li>
+        <li style="padding:3px 0;color:var(--white)">→ Use Anki with these flashcards</li>
+        <li style="padding:3px 0;color:var(--white)">→ Write incident reports in English</li>
+        <li style="padding:3px 0;color:var(--white)">→ Participate in TryHackMe in English</li>
+        <li style="padding:3px 0;color:var(--white)">→ Join English study communities or technical forums</li>
+        <li style="padding:3px 0;color:var(--white)">→ Practice pronunciation with IPA guide</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Resources</h3>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:3px 0;color:var(--cyan)">→ cisco.com/en/US/docs</li>
+        <li style="padding:3px 0;color:var(--cyan)">→ nvd.nist.gov (CVE database)</li>
+        <li style="padding:3px 0;color:var(--cyan)">→ attack.mitre.org</li>
+        <li style="padding:3px 0;color:var(--cyan)">→ rfc-editor.org (RFCs)</li>
+        <li style="padding:3px 0;color:var(--cyan)">→ portswigger.net/web-security</li>
+        <li style="padding:3px 0;color:var(--cyan)">→ sans.org/reading-room</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████ REPORT SECTION ██████████ -->
+<div id="report-section">
+  <div class="report-header">
+    <h2>◈ PERFORMANCE REPORT</h2>
+    <div id="report-date" style="color:var(--gray);font-size:11px;letter-spacing:2px;text-transform:uppercase"></div>
+    <div id="report-score-display" class="score-big pass">0%</div>
+    <div id="report-grade" style="color:var(--amber);font-size:14px;letter-spacing:3px;text-transform:uppercase"></div>
+  </div>
+
+  <div class="report-grid">
+    <div class="report-stat-card">
+      <span class="big-num text-green" id="r-correct">0</span>
+      <span class="label">Correct Answers</span>
+    </div>
+    <div class="report-stat-card">
+      <span class="big-num text-red" id="r-wrong">0</span>
+      <span class="label">Wrong / Unanswered</span>
+    </div>
+    <div class="report-stat-card">
+      <span class="big-num text-amber" id="r-time">0s</span>
+      <span class="label">Avg Time / Question</span>
+    </div>
+    <div class="report-stat-card">
+      <span class="big-num text-cyan" id="r-streak">0</span>
+      <span class="label">Best Streak</span>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">◈ PERFORMANCE BY CATEGORY</div>
+    <div id="category-chart"></div>
+  </div>
+
+  <div id="gaps-section">
+    <div class="subsec-title">▸ Identified Knowledge Gaps</div>
+    <div class="gap-list" id="gaps-list"></div>
+  </div>
+
+  <div id="suggestions-section">
+    <div class="subsec-title">▸ Personalized Study Recommendations</div>
+    <div id="suggestions-list"></div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin:20px 0;flex-wrap:wrap">
+    <button class="btn-primary" onclick="printReport()">⎙ SAVE AS PDF</button>
+    <button class="btn-secondary" onclick="restartQuiz()">↺ RETAKE QUIZ</button>
+    <button class="btn-secondary" onclick="showSection('sec-quiz')">← BACK</button>
+  </div>
+
+  <div class="answered-list">
+    <div class="subsec-title">▸ Full Answer Review</div>
+    <div id="answer-review"></div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████ -->
+<!-- JAVASCRIPT -->
+<!-- ████████████████████████████████████████████████ -->
+<script>
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock-display').textContent = now.toUTCString().replace('GMT','UTC');
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── NAV ──
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('report-section').classList.remove('show');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ────────────────────────────────────────────────────
+// FLASHCARD DATA
+// ────────────────────────────────────────────────────
+const flashcards = [
+  { front:'deploy', back:'To put a system, app, or patch into operation. Example: "We deployed the patch last night."', pt:'implantar', cat:'grammar' },
+  { front:'monitor', back:'To watch systems, logs, or alerts continuously. Example: "The SOC monitors suspicious activity."', pt:'monitorar', cat:'grammar' },
+  { front:'analyze', back:'To examine data carefully. Example: "The analyst analyzed the firewall logs."', pt:'analisar', cat:'grammar' },
+  { front:'investigate', back:'To look into an issue or incident. Example: "We are investigating the alert."', pt:'investigar', cat:'grammar' },
+  { front:'mitigate', back:'To reduce the impact or risk. Example: "We mitigated the exposure by disabling the service."', pt:'mitigar', cat:'grammar' },
+  { front:'bandwidth', back:'Maximum data transfer rate of a network link.', pt:'largura de banda', cat:'network' },
+  { front:'latency', back:'Delay between sending and receiving data.', pt:'latência', cat:'network' },
+  { front:'throughput', back:'Real-world transfer rate actually achieved.', pt:'taxa de transferência efetiva', cat:'network' },
+  { front:'vulnerability', back:'A weakness that can be exploited.', pt:'vulnerabilidade', cat:'security' },
+  { front:'threat', back:'Something that can cause harm to systems or data.', pt:'ameaça', cat:'security' },
+  { front:'payload', back:'The content delivered by a packet or malware.', pt:'carga útil', cat:'security' },
+  { front:'encrypt', back:'To convert plaintext into unreadable ciphertext.', pt:'criptografar', cat:'crypto' },
+  { front:'certificate', back:'A digital document that binds a public key to an identity.', pt:'certificado', cat:'crypto' },
+  { front:'VPN', back:'Virtual Private Network. Creates an encrypted tunnel over an untrusted network.', pt:'VPN', cat:'protocol' },
+  { front:'DNS', back:'Resolves domain names to IP addresses.', pt:'DNS', cat:'protocol' },
+  { front:'IaaS', back:'Infrastructure as a Service. Cloud model where provider gives VMs, network, and storage.', pt:'infraestrutura como serviço', cat:'cloud' },
+  { front:'in', back:'Used for something inside a system or environment. Example: "a bug in the code"', pt:'em / dentro de', cat:'grammar' },
+  { front:'on', back:'Used for ports, hosts, or platforms. Example: "running on Linux"', pt:'em / sobre', cat:'grammar' },
+  { front:'via', back:'Used to indicate method or channel. Example: "connected via SSH"', pt:'via / por meio de', cat:'grammar' },
+  { front:'out of scope', back:'Not included in the defined limits of a project or test.', pt:'fora do escopo', cat:'grammar' }
+];
+
+function renderFlashcards(filter='all') {
+  const area = document.getElementById('flashcard-area');
+  const filtered = filter==='all' ? flashcards : flashcards.filter(f => f.cat===filter);
+  area.innerHTML = filtered.map((f,i) => `
+    <div class="flashcard" onclick="this.classList.toggle('flipped')" data-cat="${f.cat}">
+      <div class="fc-front">${f.front}</div>
+      <div class="fc-back">
+        ${f.back}
+        <div class="pt">🇧🇷 ${f.pt}</div>
+      </div>
+      <div class="fc-hint">click to flip</div>
+    </div>
+  `).join('');
+}
+
+function filterFC(cat, btn) {
+  document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFlashcards(cat);
+}
+
+renderFlashcards();
+
+// ────────────────────────────────────────────────────
+// QUIZ DATA — 200 QUESTIONS
+// ────────────────────────────────────────────────────
+const allQuestions = [{"q":"The analyst ___ the issue every day.","opts":["review","reviews","reviewing","will review"],"ans":1,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The analyst reviews the alert.","The analyst review the alert.","The analyst do review the alert.","The analyst is reviewing the alert."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The analyst ___ in production.\"","opts":["reviews","review","did review","reviewed"],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The analyst reviews the logs.","The analyst review the logs every morning.","The analyst have review the logs.","The analyst reviewing the logs."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The firewall ___ the issue every day.","opts":["block","blocks","blocking","will block"],"ans":1,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The firewall blocks the alert.","The firewall block the alert.","The firewall do block the alert.","The firewall is blocking the alert."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The firewall ___ in production.\"","opts":["blocks","block","did block","blocked"],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The firewall blocks the logs.","The firewall block the logs every morning.","The firewall have block the logs.","The firewall blocking the logs."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The system ___ the issue every day.","opts":["detect","detects","detecting","will detect"],"ans":1,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The system detects the alert.","The system detect the alert.","The system do detect the alert.","The system is detecting the alert."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The system ___ in production.\"","opts":["detects","detect","did detect","detected"],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The system detects the logs.","The system detect the logs every morning.","The system have detect the logs.","The system detecting the logs."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The server ___ the issue every day.","opts":["run","runs","runing","will run"],"ans":1,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The server runs the alert.","The server run the alert.","The server do run the alert.","The server is runing the alert."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The server ___ in production.\"","opts":["runs","run","did run","runed"],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The server runs the logs.","The server run the logs every morning.","The server have run the logs.","The server runing the logs."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The scanner ___ the issue every day.","opts":["identify","identifies","identifying","will identify"],"ans":1,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The scanner identifies the alert.","The scanner identify the alert.","The scanner do identify the alert.","The scanner is identifying the alert."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The scanner ___ in production.\"","opts":["identifies","identify","did identify","identifyed"],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The scanner identifies the logs.","The scanner identify the logs every morning.","The scanner have identify the logs.","The scanner identifying the logs."],"ans":0,"cat":"Grammar","diff":"easy","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The report ___ the issue every day.","opts":["show","shows","showing","will show"],"ans":1,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The report shows the alert.","The report show the alert.","The report do show the alert.","The report is showing the alert."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The report ___ in production.\"","opts":["shows","show","did show","showed"],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The report shows the logs.","The report show the logs every morning.","The report have show the logs.","The report showing the logs."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The endpoint ___ the issue every day.","opts":["need","needs","needing","will need"],"ans":1,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The endpoint needs the alert.","The endpoint need the alert.","The endpoint do need the alert.","The endpoint is needing the alert."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The endpoint ___ in production.\"","opts":["needs","need","did need","needed"],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The endpoint needs the logs.","The endpoint need the logs every morning.","The endpoint have need the logs.","The endpoint needing the logs."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The user ___ the issue every day.","opts":["have","has","haveing","will have"],"ans":1,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The user has the alert.","The user have the alert.","The user do have the alert.","The user is haveing the alert."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The user ___ in production.\"","opts":["has","have","did have","haveed"],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The user has the logs.","The user have the logs every morning.","The user have have the logs.","The user haveing the logs."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The patch ___ the issue every day.","opts":["fix","fixes","fixing","will fix"],"ans":1,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The patch fixes the alert.","The patch fix the alert.","The patch do fix the alert.","The patch is fixing the alert."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The patch ___ in production.\"","opts":["fixes","fix","did fix","fixed"],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The patch fixes the logs.","The patch fix the logs every morning.","The patch have fix the logs.","The patch fixing the logs."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"The policy ___ the issue every day.","opts":["apply","applies","applying","will apply"],"ans":1,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Choose the correct sentence.","opts":["The policy applies the alert.","The policy apply the alert.","The policy do apply the alert.","The policy is applying the alert."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Complete the sentence: \"The policy ___ in production.\"","opts":["applies","apply","did apply","applyed"],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Which option is grammatically correct?","opts":["The policy applies the logs.","The policy apply the logs every morning.","The policy have apply the logs.","The policy applying the logs."],"ans":0,"cat":"Grammar","diff":"med","why":"This subject is singular, so the simple present uses the third-person singular form."},{"q":"Yesterday, the team ___ the environment.","opts":["deploy","deployed","deployed","deploys"],"ans":1,"cat":"Verbs","diff":"easy","why":"The simple past of \"deploy\" is \"deployed\"."},{"q":"Choose the correct passive sentence.","opts":["The server deployed.","The server was deployed.","The server is deployed.","The server has deploy."],"ans":1,"cat":"Verbs","diff":"med","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["deploy","deployed","deployed","deploying"],"ans":2,"cat":"Verbs","diff":"med","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have deployed the update.","We have deployed the update.","We has deployed the update.","We having deployed the update."],"ans":0,"cat":"Verbs","diff":"med","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["monitor","monitored","monitored","monitors"],"ans":1,"cat":"Verbs","diff":"easy","why":"The simple past of \"monitor\" is \"monitored\"."},{"q":"Choose the correct passive sentence.","opts":["The server monitored.","The server was monitored.","The server is monitored.","The server has monitor."],"ans":1,"cat":"Verbs","diff":"med","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["monitor","monitored","monitored","monitoring"],"ans":2,"cat":"Verbs","diff":"med","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have monitored the update.","We have monitored the update.","We has monitored the update.","We having monitored the update."],"ans":0,"cat":"Verbs","diff":"med","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["analyze","analyzed","analyzed","analyzes"],"ans":1,"cat":"Verbs","diff":"easy","why":"The simple past of \"analyze\" is \"analyzed\"."},{"q":"Choose the correct passive sentence.","opts":["The server analyzed.","The server was analyzed.","The server is analyzed.","The server has analyze."],"ans":1,"cat":"Verbs","diff":"med","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["analyze","analyzed","analyzed","analyzeing"],"ans":2,"cat":"Verbs","diff":"med","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have analyzed the update.","We have analyzed the update.","We has analyzed the update.","We having analyzed the update."],"ans":0,"cat":"Verbs","diff":"med","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["detect","detected","detected","detects"],"ans":1,"cat":"Verbs","diff":"easy","why":"The simple past of \"detect\" is \"detected\"."},{"q":"Choose the correct passive sentence.","opts":["The server detected.","The server was detected.","The server is detected.","The server has detect."],"ans":1,"cat":"Verbs","diff":"med","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["detect","detected","detected","detecting"],"ans":2,"cat":"Verbs","diff":"med","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have detected the update.","We have detected the update.","We has detected the update.","We having detected the update."],"ans":0,"cat":"Verbs","diff":"med","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["patch","patched","patched","patchs"],"ans":1,"cat":"Verbs","diff":"easy","why":"The simple past of \"patch\" is \"patched\"."},{"q":"Choose the correct passive sentence.","opts":["The server patched.","The server was patched.","The server is patched.","The server has patch."],"ans":1,"cat":"Verbs","diff":"med","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["patch","patched","patched","patching"],"ans":2,"cat":"Verbs","diff":"med","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have patched the update.","We have patched the update.","We has patched the update.","We having patched the update."],"ans":0,"cat":"Verbs","diff":"med","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["find","found","found","finds"],"ans":1,"cat":"Verbs","diff":"med","why":"The simple past of \"find\" is \"found\"."},{"q":"Choose the correct passive sentence.","opts":["The server found.","The server was found.","The server is found.","The server has find."],"ans":1,"cat":"Verbs","diff":"hard","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["find","found","found","finding"],"ans":2,"cat":"Verbs","diff":"hard","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have found the update.","We have found the update.","We has found the update.","We having found the update."],"ans":0,"cat":"Verbs","diff":"hard","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["write","wrote","written","writes"],"ans":1,"cat":"Verbs","diff":"med","why":"The simple past of \"write\" is \"wrote\"."},{"q":"Choose the correct passive sentence.","opts":["The server written.","The server was written.","The server is wrote.","The server has write."],"ans":1,"cat":"Verbs","diff":"hard","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["write","wrote","written","writeing"],"ans":2,"cat":"Verbs","diff":"hard","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have written the update.","We have wrote the update.","We has written the update.","We having written the update."],"ans":0,"cat":"Verbs","diff":"hard","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["run","ran","run","runs"],"ans":1,"cat":"Verbs","diff":"med","why":"The simple past of \"run\" is \"ran\"."},{"q":"Choose the correct passive sentence.","opts":["The server run.","The server was run.","The server is ran.","The server has run."],"ans":1,"cat":"Verbs","diff":"hard","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["run","ran","run","runing"],"ans":2,"cat":"Verbs","diff":"hard","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have run the update.","We have ran the update.","We has run the update.","We having run the update."],"ans":0,"cat":"Verbs","diff":"hard","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["see","saw","seen","sees"],"ans":1,"cat":"Verbs","diff":"med","why":"The simple past of \"see\" is \"saw\"."},{"q":"Choose the correct passive sentence.","opts":["The server seen.","The server was seen.","The server is saw.","The server has see."],"ans":1,"cat":"Verbs","diff":"hard","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["see","saw","seen","seeing"],"ans":2,"cat":"Verbs","diff":"hard","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have seen the update.","We have saw the update.","We has seen the update.","We having seen the update."],"ans":0,"cat":"Verbs","diff":"hard","why":"With \"we\", use have + past participle."},{"q":"Yesterday, the team ___ the environment.","opts":["make","made","made","makes"],"ans":1,"cat":"Verbs","diff":"med","why":"The simple past of \"make\" is \"made\"."},{"q":"Choose the correct passive sentence.","opts":["The server made.","The server was made.","The server is made.","The server has make."],"ans":1,"cat":"Verbs","diff":"hard","why":"Passive voice in the past uses was/were + past participle."},{"q":"Complete the sentence: \"The issue has been ___.\"","opts":["make","made","made","makeing"],"ans":2,"cat":"Verbs","diff":"hard","why":"Present perfect passive uses has/have been + past participle."},{"q":"Which sentence is correct?","opts":["We have made the update.","We have made the update.","We has made the update.","We having made the update."],"ans":0,"cat":"Verbs","diff":"hard","why":"With \"we\", use have + past participle."},{"q":"What does <strong>bandwidth</strong> mean?","opts":["the time delay between sending and receiving data","the maximum data transfer rate of a link","a security policy","a login attempt"],"ans":1,"cat":"Vocabulary","diff":"easy","why":"In technical English, \"bandwidth\" means the maximum data transfer rate of a link."},{"q":"Choose the best definition for <strong>bandwidth</strong>.","opts":["the maximum data transfer rate of a link","the time delay between sending and receiving data","a security policy","a login attempt"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"This is the standard meaning of \"bandwidth\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>bandwidth</strong> correctly?","opts":["The bandwidth of this link is 1 Gbps.","The bandwidth logged into the host.","We changed the bandwidth to 255.255.255.0.","The bandwidth opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>bandwidth</strong>.","opts":["the maximum data transfer rate of a link","the time delay between sending and receiving data","a security policy","a login attempt"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>latency</strong> mean?","opts":["the maximum transfer capacity of a link","the time delay between sending and receiving data","a routing protocol","a backup window"],"ans":1,"cat":"Vocabulary","diff":"easy","why":"In technical English, \"latency\" means the time delay between sending and receiving data."},{"q":"Choose the best definition for <strong>latency</strong>.","opts":["the time delay between sending and receiving data","the maximum transfer capacity of a link","a routing protocol","a backup window"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"This is the standard meaning of \"latency\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>latency</strong> correctly?","opts":["High latency affects user experience.","The latency logged into the host.","We changed the latency to 255.255.255.0.","The latency opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>latency</strong>.","opts":["the time delay between sending and receiving data","the maximum transfer capacity of a link","a routing protocol","a backup window"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>throughput</strong> mean?","opts":["a cable type","the real transfer rate actually achieved","a malware family","a firewall rule"],"ans":1,"cat":"Vocabulary","diff":"easy","why":"In technical English, \"throughput\" means the real transfer rate actually achieved."},{"q":"Choose the best definition for <strong>throughput</strong>.","opts":["the real transfer rate actually achieved","a cable type","a malware family","a firewall rule"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"This is the standard meaning of \"throughput\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>throughput</strong> correctly?","opts":["The throughput was lower than expected.","The throughput logged into the host.","We changed the throughput to 255.255.255.0.","The throughput opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>throughput</strong>.","opts":["the real transfer rate actually achieved","a cable type","a malware family","a firewall rule"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>vulnerability</strong> mean?","opts":["a successful patch","a weakness that can be exploited","a strong password","an IP address"],"ans":1,"cat":"Vocabulary","diff":"easy","why":"In technical English, \"vulnerability\" means a weakness that can be exploited."},{"q":"Choose the best definition for <strong>vulnerability</strong>.","opts":["a weakness that can be exploited","a successful patch","a strong password","an IP address"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"This is the standard meaning of \"vulnerability\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>vulnerability</strong> correctly?","opts":["The scan found a critical vulnerability.","The vulnerability logged into the host.","We changed the vulnerability to 255.255.255.0.","The vulnerability opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>vulnerability</strong>.","opts":["a weakness that can be exploited","a successful patch","a strong password","an IP address"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>threat</strong> mean?","opts":["a troubleshooting method","a potential cause of harm","a subnet mask","a log format"],"ans":1,"cat":"Vocabulary","diff":"easy","why":"In technical English, \"threat\" means a potential cause of harm."},{"q":"Choose the best definition for <strong>threat</strong>.","opts":["a potential cause of harm","a troubleshooting method","a subnet mask","a log format"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"This is the standard meaning of \"threat\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>threat</strong> correctly?","opts":["The threat was contained quickly.","The threat logged into the host.","We changed the threat to 255.255.255.0.","The threat opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>threat</strong>.","opts":["a potential cause of harm","a troubleshooting method","a subnet mask","a log format"],"ans":0,"cat":"Vocabulary","diff":"easy","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>payload</strong> mean?","opts":["a physical cable","the content delivered by a packet or malware","a DNS record","a software license"],"ans":1,"cat":"Vocabulary","diff":"med","why":"In technical English, \"payload\" means the content delivered by a packet or malware."},{"q":"Choose the best definition for <strong>payload</strong>.","opts":["the content delivered by a packet or malware","a physical cable","a DNS record","a software license"],"ans":0,"cat":"Vocabulary","diff":"med","why":"This is the standard meaning of \"payload\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>payload</strong> correctly?","opts":["The payload was blocked before execution.","The payload logged into the host.","We changed the payload to 255.255.255.0.","The payload opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>payload</strong>.","opts":["the content delivered by a packet or malware","a physical cable","a DNS record","a software license"],"ans":0,"cat":"Vocabulary","diff":"med","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>patch</strong> mean?","opts":["a log retention setting","a software correction or update","a report summary","a file extension"],"ans":1,"cat":"Vocabulary","diff":"med","why":"In technical English, \"patch\" means a software correction or update."},{"q":"Choose the best definition for <strong>patch</strong>.","opts":["a software correction or update","a log retention setting","a report summary","a file extension"],"ans":0,"cat":"Vocabulary","diff":"med","why":"This is the standard meaning of \"patch\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>patch</strong> correctly?","opts":["The team applied the patch overnight.","The patch logged into the host.","We changed the patch to 255.255.255.0.","The patch opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>patch</strong>.","opts":["a software correction or update","a log retention setting","a report summary","a file extension"],"ans":0,"cat":"Vocabulary","diff":"med","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>hardening</strong> mean?","opts":["sending traffic to another subnet","the process of making a system more secure","compressing data","formatting a disk"],"ans":1,"cat":"Vocabulary","diff":"med","why":"In technical English, \"hardening\" means the process of making a system more secure."},{"q":"Choose the best definition for <strong>hardening</strong>.","opts":["the process of making a system more secure","sending traffic to another subnet","compressing data","formatting a disk"],"ans":0,"cat":"Vocabulary","diff":"med","why":"This is the standard meaning of \"hardening\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>hardening</strong> correctly?","opts":["System hardening reduces attack surface.","The hardening logged into the host.","We changed the hardening to 255.255.255.0.","The hardening opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>hardening</strong>.","opts":["the process of making a system more secure","sending traffic to another subnet","compressing data","formatting a disk"],"ans":0,"cat":"Vocabulary","diff":"med","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>exfiltration</strong> mean?","opts":["a login failure","unauthorized removal of data","a port scan","an MFA prompt"],"ans":1,"cat":"Vocabulary","diff":"med","why":"In technical English, \"exfiltration\" means unauthorized removal of data."},{"q":"Choose the best definition for <strong>exfiltration</strong>.","opts":["unauthorized removal of data","a login failure","a port scan","an MFA prompt"],"ans":0,"cat":"Vocabulary","diff":"med","why":"This is the standard meaning of \"exfiltration\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>exfiltration</strong> correctly?","opts":["The team detected data exfiltration.","The exfiltration logged into the host.","We changed the exfiltration to 255.255.255.0.","The exfiltration opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>exfiltration</strong>.","opts":["unauthorized removal of data","a login failure","a port scan","an MFA prompt"],"ans":0,"cat":"Vocabulary","diff":"med","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"What does <strong>least privilege</strong> mean?","opts":["allowing all traffic","giving only the minimum access required","disabling encryption","using the default password"],"ans":1,"cat":"Vocabulary","diff":"med","why":"In technical English, \"least privilege\" means giving only the minimum access required."},{"q":"Choose the best definition for <strong>least privilege</strong>.","opts":["giving only the minimum access required","allowing all traffic","disabling encryption","using the default password"],"ans":0,"cat":"Vocabulary","diff":"med","why":"This is the standard meaning of \"least privilege\" in cybersecurity and IT."},{"q":"Which sentence uses <strong>least privilege</strong> correctly?","opts":["Least privilege reduces unnecessary exposure.","The least privilege logged into the host.","We changed the least privilege to 255.255.255.0.","The least privilege opened a support ticket."],"ans":0,"cat":"Vocabulary","diff":"hard","why":"Only one option uses the term naturally in context."},{"q":"Select the closest meaning of <strong>least privilege</strong>.","opts":["giving only the minimum access required","allowing all traffic","disabling encryption","using the default password"],"ans":0,"cat":"Vocabulary","diff":"med","why":"Focus on the actual technical meaning, not only the literal translation."},{"q":"A vulnerability ___ the application was exploited.","opts":["in","on","at","by"],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"in\" for something inside a system, app, or environment."},{"q":"Choose the correct phrase with <strong>in</strong>.","opts":["A vulnerability in the application was exploited.","A vulnerability on the application was exploited.","A vulnerability at the application was exploited.","A vulnerability by the application was exploited."],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"in\" for something inside a system, app, or environment."},{"q":"Which option sounds most natural in technical English?","opts":["A vulnerability in the application was exploited.","A vulnerability on the application was exploited.","A vulnerability at the application was exploited.","A vulnerability by the application was exploited."],"ans":0,"cat":"Prepositions","diff":"med","why":"Use \"in\" for something inside a system, app, or environment."},{"q":"Complete the sentence correctly: \"A vulnerability ___ the application was exploited.\"","opts":["in","on","at","by"],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"in\" for something inside a system, app, or environment."},{"q":"Traffic ___ port 443 is encrypted.","opts":["in","on","for","with"],"ans":1,"cat":"Prepositions","diff":"easy","why":"Use \"on\" with ports, hosts, and platforms."},{"q":"Choose the correct phrase with <strong>on</strong>.","opts":["Traffic in port 443 is encrypted.","Traffic on port 443 is encrypted.","Traffic for port 443 is encrypted.","Traffic with port 443 is encrypted."],"ans":1,"cat":"Prepositions","diff":"easy","why":"Use \"on\" with ports, hosts, and platforms."},{"q":"Which option sounds most natural in technical English?","opts":["Traffic in port 443 is encrypted.","Traffic on port 443 is encrypted.","Traffic for port 443 is encrypted.","Traffic with port 443 is encrypted."],"ans":1,"cat":"Prepositions","diff":"med","why":"Use \"on\" with ports, hosts, and platforms."},{"q":"Complete the sentence correctly: \"Traffic ___ port 443 is encrypted.\"","opts":["in","on","for","with"],"ans":1,"cat":"Prepositions","diff":"easy","why":"Use \"on\" with ports, hosts, and platforms."},{"q":"The analyst connected ___ the VPN.","opts":["for","to","at","from"],"ans":1,"cat":"Prepositions","diff":"easy","why":"Connect to a service or resource."},{"q":"Choose the correct phrase with <strong>to</strong>.","opts":["The analyst connected for the VPN.","The analyst connected to the VPN.","The analyst connected at the VPN.","The analyst connected from the VPN."],"ans":1,"cat":"Prepositions","diff":"easy","why":"Connect to a service or resource."},{"q":"Which option sounds most natural in technical English?","opts":["The analyst connected for the VPN.","The analyst connected to the VPN.","The analyst connected at the VPN.","The analyst connected from the VPN."],"ans":1,"cat":"Prepositions","diff":"med","why":"Connect to a service or resource."},{"q":"Complete the sentence correctly: \"The analyst connected ___ the VPN.\"","opts":["for","to","at","from"],"ans":1,"cat":"Prepositions","diff":"easy","why":"Connect to a service or resource."},{"q":"The traffic came ___ the endpoint.","opts":["from","in","to","over"],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"from\" for origin."},{"q":"Choose the correct phrase with <strong>from</strong>.","opts":["The traffic came from the endpoint.","The traffic came in the endpoint.","The traffic came to the endpoint.","The traffic came over the endpoint."],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"from\" for origin."},{"q":"Which option sounds most natural in technical English?","opts":["The traffic came from the endpoint.","The traffic came in the endpoint.","The traffic came to the endpoint.","The traffic came over the endpoint."],"ans":0,"cat":"Prepositions","diff":"med","why":"Use \"from\" for origin."},{"q":"Complete the sentence correctly: \"The traffic came ___ the endpoint.\"","opts":["from","in","to","over"],"ans":0,"cat":"Prepositions","diff":"easy","why":"Use \"from\" for origin."},{"q":"The incident started ___ 03:00 UTC.","opts":["in","on","at","to"],"ans":2,"cat":"Prepositions","diff":"easy","why":"Use \"at\" for specific times."},{"q":"Choose the correct phrase with <strong>at</strong>.","opts":["The incident started in 03:00 UTC.","The incident started on 03:00 UTC.","The incident started at 03:00 UTC.","The incident started to 03:00 UTC."],"ans":2,"cat":"Prepositions","diff":"easy","why":"Use \"at\" for specific times."},{"q":"Which option sounds most natural in technical English?","opts":["The incident started in 03:00 UTC.","The incident started on 03:00 UTC.","The incident started at 03:00 UTC.","The incident started to 03:00 UTC."],"ans":2,"cat":"Prepositions","diff":"med","why":"Use \"at\" for specific times."},{"q":"Complete the sentence correctly: \"The incident started ___ 03:00 UTC.\"","opts":["in","on","at","to"],"ans":2,"cat":"Prepositions","diff":"easy","why":"Use \"at\" for specific times."},{"q":"The admin logged in ___ SSH.","opts":["through","via","on","in"],"ans":1,"cat":"Prepositions","diff":"med","why":"Use \"via\" to indicate method or channel."},{"q":"Choose the correct phrase with <strong>via</strong>.","opts":["The admin logged in through SSH.","The admin logged in via SSH.","The admin logged in on SSH.","The admin logged in in SSH."],"ans":1,"cat":"Prepositions","diff":"med","why":"Use \"via\" to indicate method or channel."},{"q":"Which option sounds most natural in technical English?","opts":["The admin logged in through SSH.","The admin logged in via SSH.","The admin logged in on SSH.","The admin logged in in SSH."],"ans":1,"cat":"Prepositions","diff":"hard","why":"Use \"via\" to indicate method or channel."},{"q":"Complete the sentence correctly: \"The admin logged in ___ SSH.\"","opts":["through","via","on","in"],"ans":1,"cat":"Prepositions","diff":"med","why":"Use \"via\" to indicate method or channel."},{"q":"The packets passed ___ the gateway.","opts":["over","in","through","at"],"ans":2,"cat":"Prepositions","diff":"med","why":"Use \"through\" for movement across a path."},{"q":"Choose the correct phrase with <strong>through</strong>.","opts":["The packets passed over the gateway.","The packets passed in the gateway.","The packets passed through the gateway.","The packets passed at the gateway."],"ans":2,"cat":"Prepositions","diff":"med","why":"Use \"through\" for movement across a path."},{"q":"Which option sounds most natural in technical English?","opts":["The packets passed over the gateway.","The packets passed in the gateway.","The packets passed through the gateway.","The packets passed at the gateway."],"ans":2,"cat":"Prepositions","diff":"hard","why":"Use \"through\" for movement across a path."},{"q":"Complete the sentence correctly: \"The packets passed ___ the gateway.\"","opts":["over","in","through","at"],"ans":2,"cat":"Prepositions","diff":"med","why":"Use \"through\" for movement across a path."},{"q":"The connection is protected ___ TLS.","opts":["over","on","at","for"],"ans":0,"cat":"Prepositions","diff":"med","why":"Use \"over\" with protocols like TLS in many technical contexts."},{"q":"Choose the correct phrase with <strong>over</strong>.","opts":["The connection is protected over TLS.","The connection is protected on TLS.","The connection is protected at TLS.","The connection is protected for TLS."],"ans":0,"cat":"Prepositions","diff":"med","why":"Use \"over\" with protocols like TLS in many technical contexts."},{"q":"Which option sounds most natural in technical English?","opts":["The connection is protected over TLS.","The connection is protected on TLS.","The connection is protected at TLS.","The connection is protected for TLS."],"ans":0,"cat":"Prepositions","diff":"hard","why":"Use \"over\" with protocols like TLS in many technical contexts."},{"q":"Complete the sentence correctly: \"The connection is protected ___ TLS.\"","opts":["over","on","at","for"],"ans":0,"cat":"Prepositions","diff":"med","why":"Use \"over\" with protocols like TLS in many technical contexts."},{"q":"She is responsible ___ the deployment.","opts":["on","for","at","from"],"ans":1,"cat":"Prepositions","diff":"med","why":"Responsible for + noun/gerund."},{"q":"Choose the correct phrase with <strong>for</strong>.","opts":["She is responsible on the deployment.","She is responsible for the deployment.","She is responsible at the deployment.","She is responsible from the deployment."],"ans":1,"cat":"Prepositions","diff":"med","why":"Responsible for + noun/gerund."},{"q":"Which option sounds most natural in technical English?","opts":["She is responsible on the deployment.","She is responsible for the deployment.","She is responsible at the deployment.","She is responsible from the deployment."],"ans":1,"cat":"Prepositions","diff":"hard","why":"Responsible for + noun/gerund."},{"q":"Complete the sentence correctly: \"She is responsible ___ the deployment.\"","opts":["on","for","at","from"],"ans":1,"cat":"Prepositions","diff":"med","why":"Responsible for + noun/gerund."},{"q":"Please focus ___ the root cause.","opts":["at","in","on","for"],"ans":2,"cat":"Prepositions","diff":"med","why":"Focus on is the natural collocation."},{"q":"Choose the correct phrase with <strong>on</strong>.","opts":["Please focus at the root cause.","Please focus in the root cause.","Please focus on the root cause.","Please focus for the root cause."],"ans":2,"cat":"Prepositions","diff":"med","why":"Focus on is the natural collocation."},{"q":"Which option sounds most natural in technical English?","opts":["Please focus at the root cause.","Please focus in the root cause.","Please focus on the root cause.","Please focus for the root cause."],"ans":2,"cat":"Prepositions","diff":"hard","why":"Focus on is the natural collocation."},{"q":"Complete the sentence correctly: \"Please focus ___ the root cause.\"","opts":["at","in","on","for"],"ans":2,"cat":"Prepositions","diff":"med","why":"Focus on is the natural collocation."},{"q":"<strong>Read:</strong> \"The monitoring system detected unusual outbound traffic. The analyst reviewed the logs and isolated the host.\"<br><br>What happened first?","opts":["The host was isolated.","The logs were reviewed.","Unusual outbound traffic was detected.","The report was written."],"ans":2,"cat":"Reading","diff":"med","why":"The detection happened before review and isolation."},{"q":"<strong>Read:</strong> \"The monitoring system detected unusual outbound traffic. The analyst reviewed the logs and isolated the host.\"<br><br>Choose the best answer.","opts":["The host was isolated.","The logs were reviewed.","Unusual outbound traffic was detected.","The report was written."],"ans":2,"cat":"Reading","diff":"med","why":"The detection happened before review and isolation."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"The issue was identified during routine testing. Immediate remediation is recommended.\"<br><br>Which sentence is passive?","opts":["The issue was identified during routine testing.","The team reviews the issue every day.","We recommend remediation now.","The analyst writes the report."],"ans":0,"cat":"Reading","diff":"med","why":"Passive voice uses was/were + past participle."},{"q":"<strong>Read:</strong> \"The issue was identified during routine testing. Immediate remediation is recommended.\"<br><br>Choose the best answer.","opts":["The issue was identified during routine testing.","The team reviews the issue every day.","We recommend remediation now.","The analyst writes the report."],"ans":0,"cat":"Reading","diff":"med","why":"Passive voice uses was/were + past participle."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"Please be advised that the maintenance window is scheduled for Saturday at 02:00 UTC.\"<br><br>What does \"scheduled\" mean here?","opts":["cancelled","planned","ignored","delayed"],"ans":1,"cat":"Reading","diff":"med","why":"\"Scheduled\" means planned for a specific time."},{"q":"<strong>Read:</strong> \"Please be advised that the maintenance window is scheduled for Saturday at 02:00 UTC.\"<br><br>Choose the best answer.","opts":["cancelled","planned","ignored","delayed"],"ans":1,"cat":"Reading","diff":"med","why":"\"Scheduled\" means planned for a specific time."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"As a result of the patch, the vulnerability was remediated.\"<br><br>What does \"as a result of\" indicate?","opts":["cause only","contrast","consequence","permission"],"ans":2,"cat":"Reading","diff":"med","why":"This connector introduces a consequence or outcome."},{"q":"<strong>Read:</strong> \"As a result of the patch, the vulnerability was remediated.\"<br><br>Choose the best answer.","opts":["cause only","contrast","consequence","permission"],"ans":2,"cat":"Reading","diff":"med","why":"This connector introduces a consequence or outcome."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"Unless MFA is enabled, remote access will be denied.\"<br><br>What does \"unless\" mean?","opts":["because","if not","even though","after"],"ans":1,"cat":"Reading","diff":"med","why":"\"Unless\" means \"if not.\""},{"q":"<strong>Read:</strong> \"Unless MFA is enabled, remote access will be denied.\"<br><br>Choose the best answer.","opts":["because","if not","even though","after"],"ans":1,"cat":"Reading","diff":"med","why":"\"Unless\" means \"if not.\""},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"The root cause analysis revealed a misconfigured access control list.\"<br><br>What did the analysis reveal?","opts":["a new firewall","a misconfigured access control list","a stronger password","a successful backup"],"ans":1,"cat":"Reading","diff":"hard","why":"The answer is stated directly in the sentence."},{"q":"<strong>Read:</strong> \"The root cause analysis revealed a misconfigured access control list.\"<br><br>Choose the best answer.","opts":["a new firewall","a misconfigured access control list","a stronger password","a successful backup"],"ans":1,"cat":"Reading","diff":"hard","why":"The answer is stated directly in the sentence."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"The credentials have been exposed online.\"<br><br>Which option best paraphrases the sentence?","opts":["The credentials are fully protected.","The credentials became publicly available.","The credentials were deleted.","The credentials were encrypted."],"ans":1,"cat":"Reading","diff":"hard","why":"Exposed means no longer protected; they became visible or accessible."},{"q":"<strong>Read:</strong> \"The credentials have been exposed online.\"<br><br>Choose the best answer.","opts":["The credentials are fully protected.","The credentials became publicly available.","The credentials were deleted.","The credentials were encrypted."],"ans":1,"cat":"Reading","diff":"hard","why":"Exposed means no longer protected; they became visible or accessible."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"The analyst wrote an executive summary for management.\"<br><br>Who is the target audience?","opts":["network devices","management","the malware","the VPN"],"ans":1,"cat":"Reading","diff":"hard","why":"An executive summary is written for management or leadership."},{"q":"<strong>Read:</strong> \"The analyst wrote an executive summary for management.\"<br><br>Choose the best answer.","opts":["network devices","management","the malware","the VPN"],"ans":1,"cat":"Reading","diff":"hard","why":"An executive summary is written for management or leadership."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"Due to a configuration error, the service became unavailable.\"<br><br>What is the cause?","opts":["the report","a configuration error","the maintenance window","a bandwidth upgrade"],"ans":1,"cat":"Reading","diff":"hard","why":"Due to introduces the cause."},{"q":"<strong>Read:</strong> \"Due to a configuration error, the service became unavailable.\"<br><br>Choose the best answer.","opts":["the report","a configuration error","the maintenance window","a bandwidth upgrade"],"ans":1,"cat":"Reading","diff":"hard","why":"Due to introduces the cause."},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."},{"q":"<strong>Read:</strong> \"The team mitigated the risk by disabling public access.\"<br><br>How did they mitigate the risk?","opts":["by adding more users","by disabling public access","by deleting the logs","by changing the hostname"],"ans":1,"cat":"Reading","diff":"hard","why":"The method is stated directly after \"by.\""},{"q":"<strong>Read:</strong> \"The team mitigated the risk by disabling public access.\"<br><br>Choose the best answer.","opts":["by adding more users","by disabling public access","by deleting the logs","by changing the hostname"],"ans":1,"cat":"Reading","diff":"hard","why":"The method is stated directly after \"by.\""},{"q":"Choose the most formal sentence for a report.","opts":["We fixed it and stuff.","The issue was identified and remediation is recommended.","The bug was crazy.","It broke lol."],"ans":1,"cat":"Reading","diff":"hard","why":"Formal report English prefers precise and neutral language."},{"q":"Which connector is used correctly?","opts":["due to the issue","as a result of the patch","unless the report","according to fix"],"ans":1,"cat":"Reading","diff":"hard","why":"As a result of is a complete connector used to introduce a consequence."}];
+
+// ── QUIZ STATE ──
+let quizConfig = { count: 50, timerSeconds: 30 };
+let quizState = {
+  questions: [],
+  currentIndex: 0,
+  answers: [],
+  timerInterval: null,
+  timeLeft: 30,
+  timeSpent: [],
+  startTime: null,
+  streak: 0,
+  bestStreak: 0
+};
+
+function setQCount(n, btn) {
+  quizConfig.count = n;
+  document.querySelectorAll('[id^="qcount-"]').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function setTimer(n, btn) {
+  quizConfig.timerSeconds = n;
+  document.querySelectorAll('[id^="timer-"]').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  const shuffled = shuffle(allQuestions);
+  quizState.questions = shuffled.slice(0, Math.min(quizConfig.count, shuffled.length));
+  quizState.currentIndex = 0;
+  quizState.answers = [];
+  quizState.timeSpent = [];
+  quizState.streak = 0;
+  quizState.bestStreak = 0;
+  quizState.startTime = Date.now();
+
+  document.getElementById('quiz-start-screen').style.display = 'none';
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('q-total').textContent = quizState.questions.length;
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizState.questions[quizState.currentIndex];
+  const idx = quizState.currentIndex;
+
+  document.getElementById('q-current').textContent = idx+1;
+  document.getElementById('progress-bar').style.width = ((idx/quizState.questions.length)*100)+'%';
+
+  const diffClass = q.diff==='easy' ? 'diff-easy' : q.diff==='med' ? 'diff-med' : 'diff-hard';
+  const diffLabel = q.diff==='easy' ? 'EASY' : q.diff==='med' ? 'MEDIUM' : 'HARD';
+
+  document.getElementById('question-area').innerHTML = `
+    <div class="question-card">
+      <div class="question-meta">
+        <span class="q-number">Q ${idx+1} of ${quizState.questions.length}</span>
+        <span class="q-category">${q.cat}</span>
+        <span class="q-difficulty ${diffClass}">${diffLabel}</span>
+      </div>
+      <div class="question-text">${q.q}</div>
+      <div class="options-grid">
+        ${q.opts.map((opt,i) => `
+          <button class="option-btn" id="opt-${i}" onclick="selectAnswer(${i})">
+            <span class="option-letter">${['A','B','C','D'][i]}.</span> ${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation-box" id="explanation-box">
+        <div class="exp-label">◈ Explanation</div>
+        <p id="exp-text"></p>
+        <p class="why" id="why-text"></p>
+      </div>
+    </div>
+    <div class="quiz-controls">
+      <button class="btn-secondary" onclick="skipQuestion()">SKIP →</button>
+    </div>
+  `;
+
+  if (quizConfig.timerSeconds > 0) {
+    startTimer();
+  }
+  quizState._qStartTime = Date.now();
+}
+
+function startTimer() {
+  clearInterval(quizState.timerInterval);
+  quizState.timeLeft = quizConfig.timerSeconds;
+  const display = document.getElementById('timer-display');
+  display.textContent = quizState.timeLeft;
+  display.className = '';
+
+  quizState.timerInterval = setInterval(() => {
+    quizState.timeLeft--;
+    display.textContent = quizState.timeLeft;
+    if (quizState.timeLeft <= 5) display.className = 'danger';
+    else if (quizState.timeLeft <= 10) display.className = 'warning';
+    if (quizState.timeLeft <= 0) {
+      clearInterval(quizState.timerInterval);
+      autoFail();
+    }
+  }, 1000);
+}
+
+function autoFail() {
+  const q = quizState.questions[quizState.currentIndex];
+  quizState.answers.push({ answered: null, correct: q.ans, result: 'timeout' });
+  quizState.timeSpent.push(quizConfig.timerSeconds * 1000);
+  quizState.streak = 0;
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  document.getElementById(`opt-${q.ans}`).classList.add('correct');
+  showExplanation(q);
+  document.querySelector('.quiz-controls').innerHTML = `<button class="btn-primary" onclick="nextQuestion()">NEXT →</button>`;
+  updateStats();
+}
+
+function selectAnswer(chosen) {
+  clearInterval(quizState.timerInterval);
+  const q = quizState.questions[quizState.currentIndex];
+  const timeSpent = Date.now() - quizState._qStartTime;
+  const isCorrect = chosen === q.ans;
+
+  quizState.answers.push({ answered: chosen, correct: q.ans, result: isCorrect ? 'correct' : 'wrong', timeSpent });
+  quizState.timeSpent.push(timeSpent);
+
+  if (isCorrect) {
+    quizState.streak++;
+    if (quizState.streak > quizState.bestStreak) quizState.bestStreak = quizState.streak;
+  } else {
+    quizState.streak = 0;
+  }
+
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  document.getElementById(`opt-${chosen}`).classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) document.getElementById(`opt-${q.ans}`).classList.add('correct');
+
+  showExplanation(q);
+  document.querySelector('.quiz-controls').innerHTML = `<button class="btn-primary" onclick="nextQuestion()">NEXT →</button>`;
+  updateStats();
+}
+
+function showExplanation(q) {
+  const box = document.getElementById('explanation-box');
+  box.classList.add('show');
+  document.getElementById('exp-text').textContent = `Correct answer: ${['A','B','C','D'][q.ans]}. ${q.opts[q.ans]}`;
+  document.getElementById('why-text').textContent = '→ ' + q.why;
+}
+
+function skipQuestion() {
+  const q = quizState.questions[quizState.currentIndex];
+  quizState.answers.push({ answered: null, correct: q.ans, result: 'skipped' });
+  quizState.timeSpent.push(Date.now() - quizState._qStartTime);
+  quizState.streak = 0;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  quizState.currentIndex++;
+  if (quizState.currentIndex >= quizState.questions.length) {
+    endQuiz();
+  } else {
+    renderQuestion();
+  }
+}
+
+function updateStats() {
+  const correct = quizState.answers.filter(a => a.result==='correct').length;
+  const wrong = quizState.answers.filter(a => a.result==='wrong' || a.result==='timeout' || a.result==='skipped').length;
+  document.getElementById('q-correct-count').textContent = correct;
+  document.getElementById('q-wrong-count').textContent = wrong;
+}
+
+function endQuiz() {
+  clearInterval(quizState.timerInterval);
+  showReport();
+}
+
+function showReport() {
+  document.getElementById('sec-quiz').classList.remove('active');
+  document.getElementById('report-section').classList.add('show');
+  window.scrollTo(0,0);
+
+  const total = quizState.questions.length;
+  const correct = quizState.answers.filter(a => a.result==='correct').length;
+  const wrong = quizState.answers.filter(a => a.result==='wrong' || a.result==='timeout').length;
+  const skipped = quizState.answers.filter(a => a.result==='skipped').length;
+  const pct = Math.round((correct/total)*100);
+  const avgTime = Math.round(quizState.timeSpent.reduce((a,b)=>a+b,0)/quizState.timeSpent.length/1000);
+
+  document.getElementById('report-date').textContent = new Date().toUTCString();
+  document.getElementById('report-score-display').textContent = pct + '%';
+  document.getElementById('report-score-display').className = 'score-big ' + (pct>=70?'pass':'fail');
+  document.getElementById('report-grade').textContent = pct>=90?'EXCELLENT — PASS':pct>=80?'VERY GOOD — PASS':pct>=70?'GOOD — PASS':pct>=60?'BORDERLINE — REVIEW NEEDED':'FAIL — INTENSIVE STUDY REQUIRED';
+  document.getElementById('r-correct').textContent = correct + '/' + total;
+  document.getElementById('r-wrong').textContent = wrong;
+  document.getElementById('r-time').textContent = avgTime+'s';
+  document.getElementById('r-streak').textContent = quizState.bestStreak;
+
+  // Category performance
+  const catStats = {};
+  quizState.questions.forEach((q,i) => {
+    if (!catStats[q.cat]) catStats[q.cat] = {correct:0, total:0};
+    catStats[q.cat].total++;
+    if (quizState.answers[i] && quizState.answers[i].result==='correct') catStats[q.cat].correct++;
+  });
+
+  const chartHTML = Object.entries(catStats).map(([cat,s]) => {
+    const pctCat = Math.round((s.correct/s.total)*100);
+    const cls = pctCat>=70?'':'pctCat>=50?"mid":"low"';
+    const barClass = pctCat>=70?'':'pctCat>=50?"mid":"low"';
+    const color = pctCat>=70?'var(--green3)':pctCat>=50?'var(--amber2)':'var(--red2)';
+    return `<div class="bar-chart-row">
+      <div class="cat-name">${cat}</div>
+      <div class="bar-outer">
+        <div class="bar-inner" style="width:${pctCat}%;background:${color}"></div>
+        <div class="bar-val">${s.correct}/${s.total} (${pctCat}%)</div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('category-chart').innerHTML = chartHTML;
+
+  // Gaps
+  const gaps = Object.entries(catStats)
+    .filter(([,s]) => (s.correct/s.total) < 0.7)
+    .sort((a,b) => (a[1].correct/a[1].total) - (b[1].correct/b[1].total));
+
+  const suggestions = {
+    'Grammar': 'Review subject-verb agreement, especially third-person singular in the simple present. Practice short technical sentences every day.',
+    'Verbs': 'Reinforce irregular verbs and passive voice. Focus on patterns such as "was detected" and "has been patched."',
+    'Vocabulary': 'Revise the glossary and flashcards. Try writing one sentence per term using real IT or cybersecurity context.',
+    'Prepositions': 'Study common collocations such as "in production," "on port 443," "responsible for," and "connected to."',
+    'Reading': 'Practice reading short technical paragraphs and identifying cause, consequence, passive voice, and the most formal wording.'
+  };
+
+  const gapsHTML = gaps.length ? gaps.map(([cat,s]) => `
+    <div class="gap-item">
+      <div class="gi-num">${Math.round((s.correct/s.total)*100)}%</div>
+      <div class="gi-topic">${cat} — ${s.correct}/${s.total} correct</div>
+      <div class="gi-suggestion">→ NEEDS REVIEW</div>
+    </div>
+  `).join('') : '<div class="gap-item"><div class="gi-topic" style="color:var(--green)">■ No significant gaps detected. Excellent performance!</div></div>';
+  document.getElementById('gaps-list').innerHTML = gapsHTML;
+
+  const suggestionsHTML = gaps.map(([cat]) => `
+    <div class="suggestion-block">
+      <h4>◈ ${cat} — Improvement Plan</h4>
+      <p>${suggestions[cat] || 'Review the relevant sections of this cheat sheet and take the quiz again focusing on this category.'}</p>
+    </div>
+  `).join('') || '<div class="suggestion-block"><h4>◈ Excellent Work!</h4><p>Your performance across all categories is strong. Continue with full 200-question quizzes and increase difficulty. Consider moving to actual certification practice exams.</p></div>';
+  document.getElementById('suggestions-list').innerHTML = suggestionsHTML;
+
+  // Full answer review
+  const reviewHTML = quizState.questions.map((q,i) => {
+    const ans = quizState.answers[i];
+    const isCorrect = ans && ans.result === 'correct';
+    const label = !ans || ans.result==='skipped' ? 'SKIPPED' : ans.result==='timeout' ? 'TIME OUT' : isCorrect ? 'CORRECT' : 'WRONG';
+    const labelClass = isCorrect ? 'ai-label' : 'aw-label';
+    const userAns = (ans && ans.answered !== null && ans.answered !== undefined) ? q.opts[ans.answered] : 'No answer';
+    return `
+      <div class="answered-item ${isCorrect?'correct-ans':'wrong-ans'}">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span class="${labelClass}">${label}</span>
+          <span style="color:var(--gray);font-size:11px">${q.cat} | ${q.diff.toUpperCase()}</span>
+        </div>
+        <div style="color:var(--white);font-size:13px;margin-bottom:6px">${q.q}</div>
+        ${!isCorrect ? `<div style="color:var(--red);font-size:12px">Your answer: ${userAns}</div>` : ''}
+        <div style="color:var(--green);font-size:12px">✓ Correct: ${q.opts[q.ans]}</div>
+        <div style="color:var(--amber);font-size:11px;margin-top:4px;font-style:italic">→ ${q.why}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('answer-review').innerHTML = reviewHTML;
+}
+
+function printReport() {
+  const report = document.getElementById('report-section');
+  report.classList.add('show');
+  const previousTitle = document.title;
+  document.title = 'technical-english-report';
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { document.title = previousTitle; }, 300);
+  }, 150);
+}
+
+function restartQuiz() {
+  document.getElementById('report-section').classList.remove('show');
+  document.getElementById('quiz-container').style.display = 'none';
+  document.getElementById('quiz-start-screen').style.display = 'block';
+  document.getElementById('sec-quiz').classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
